@@ -1,5 +1,5 @@
 # type: ignore
-from flask import Flask, render_template, url_for, flash
+from flask import Flask, render_template, url_for, flash, redirect
 from forms import LoginForm
 import os
 
@@ -15,12 +15,20 @@ app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 @app.route('/')
 @app.route("/home")
 def home():
-    return render_template("testbootstrap.html")
+    return render_template("test_home.html")
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        # flashed messaag below is using email data temporarly until we update the register form and database to get the 
+        # username instead 
+        flash(f"Welcome {form.email.data}!, 'success'")
+
+        # redireced below is to the home page temporarly until we update the database to redirect the user to his home
+        # page based on the user type (tech/non-tech)
+        return redirect(url_for('home'))
     return render_template("login.html", title="login", form=form)
 
 
