@@ -15,21 +15,28 @@ app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 @app.route('/')
 @app.route("/home")
 def home():
-    return render_template("test_home.html")
+    return render_template("test_home.html", title="ITicket - Home")
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        # flashed messaag below is using email data temporarly until we update the register form and database to get the 
-        # username instead 
-        flash(f"Welcome {form.email.data}!, 'success'")
 
-        # redireced below is to the home page temporarly until we update the database to redirect the user to his home
-        # page based on the user type (tech/non-tech)
-        return redirect(url_for('home'))
-    return render_template("login.html", title="login", form=form)
+        if form.email.data == "admin@iticket.com" and form.password.data == "password":
+
+            # flashed messaag below is using email data temporarly until we update the register form and database to get the 
+            # username instead 
+            flash(f"Welcome {form.email.data}!", 'success')
+
+            # redireced below is to the home page temporarly until we update the database to redirect the user to his home
+            # page based on the user type (tech/non-tech)
+            return redirect(url_for('home'))
+
+        else:
+            flash("Login Unsuccessful. Please check username and password", "danger")
+
+    return render_template("login.html", title="ITicket - Login", form=form)
 
 
 @app.errorhandler(404)
