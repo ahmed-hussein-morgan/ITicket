@@ -1,7 +1,11 @@
 # type: ignore
-from flask import Flask, render_template, url_for, flash, redirect
+from flask import Flask, render_template, url_for, flash, redirect, session
+from flask_sqlalchemy import SQLAlchemy
+from flask_session import Session
 from forms import LoginForm
 import os
+from models import __all__
+
 
 # below is another way to integrate "Bootstrap" into out app
 # from flask_bootstrap import Bootstrap
@@ -10,6 +14,18 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 # below is another way to integrate "Bootstrap" into out app
 # bootstrap = Bootstrap(app)
+
+# configure session 
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
+
+# configure the database
+app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{os.environ.get('DEV_USER')}:{os.environ.get('DEV_PASSWORD')}@localhost/{os.environ.get('FULL_TICKETTREK_DEV_DB')}"
+
+#create the database instance
+db = SQLAlchemy(app)
+
 
 
 @app.route('/')
@@ -24,6 +40,10 @@ def login():
     if form.validate_on_submit():
 
         if form.email.data == "admin@iticket.com" and form.password.data == "password":
+
+            # session["email"] = request.form.get("email")
+
+            session["email"] = form.email.data
 
             # flashed messaag below is using email data temporarly until we update the register form and database to get the 
             # username instead 
