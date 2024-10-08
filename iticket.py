@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_session import Session
 from forms import LoginForm
 import os
-from models import __all__
+from models import Ticket, IT, User, Role, UserTicket, RoleType, TicketStatus, TicketType, Requests
 
 
 # below is another way to integrate "Bootstrap" into out app
@@ -20,8 +20,13 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# configure the database
-app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{os.environ.get('DEV_USER')}:{os.environ.get('DEV_PASSWORD')}@localhost/{os.environ.get('FULL_TICKETTREK_DEV_DB')}"
+# configure the database using mysql database for production
+# app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{os.environ.get('DEV_USER')}:{os.environ.get('DEV_PASSWORD')}@localhost/{os.environ.get('FULL_TICKETTREK_DEV_DB')}"
+
+# configure the database using sqlite database for development
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///site.db"
+
+
 
 #create the database instance
 db = SQLAlchemy(app)

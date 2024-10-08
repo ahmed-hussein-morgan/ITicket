@@ -5,7 +5,7 @@
 # This model is for creating the database and tables using AQLALCHEMY Database configuered in the config.py file
 
 from sqlalchemy.sql.expression import func
-from sqlalchemy import text
+from sqlalchemy import text, Index
 from enum import Enum
 from flask_sqlalchemy import SQLAlchemy
 
@@ -56,7 +56,7 @@ class User(db.Model):
 
 class Ticket(db.Model):
     __tablename__ = "tickets"
-    ticket_id = db.Column(db.Integer, primary_key=True, autoincrement=True, unique=True, Index=True)
+    ticket_id = db.Column(db.Integer, primary_key=True, autoincrement=True, unique=True)
     ticket_type = db.Column(db.Enum(TicketType), nullable=False)
     # ticket_category = db.Column(db.String(64), nullable=False) could be changed on productuon to be "enum" with limited category list
     ticket_requests = db.Column(db.Enum(Requests), nullable=True)
@@ -87,6 +87,8 @@ class Ticket(db.Model):
     ticket_status = db.Column(db.Enum(TicketStatus), nullable=False)
     # tickets = db.relationship("IT", backref="ticket")
     tickets = db.relationship("IT", backref=db.backref("ticket", lazy=True))
+
+    __table_args__ = (Index('ix_ticket_id', ticket_id),)
 
 
 
