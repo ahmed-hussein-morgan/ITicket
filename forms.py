@@ -10,7 +10,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 class NewTicket(FlaskForm):
-    category = SelectField("Category", choices=["Mobile network connection", "PC networkconnection",\
+    category = SelectField("Category", choices=["Mobile network connection", "PC network connection",\
          "PC hardware", "PC software", "Printer"],\
          validators=[DataRequired(), ])
     title = StringField("Title", validators=[DataRequired(), length(max=50)])

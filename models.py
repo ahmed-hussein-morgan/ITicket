@@ -12,29 +12,44 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 # This model is for creating the database and tables
 class RoleType(Enum):
+    """ A drop-down list of different types of users """
     TECH = "tech"
     NON_TECH = "non-tech"
 
 class TicketStatus(Enum):
+    """ A drop-down list of different status of the ticket """
     OPEN = "open"
     RECEIVED = "received"
     SOLVED = "solved"
 
 class TicketType(Enum):
+    """ A drop-down list of different types of the ticket """
     REQUEST = "request"
     COMPLAIN = "complain"
 
 
 class Requests(Enum):
+    """ A drop-down list of different types of requests if the Ticket Type was Request """
     MOUSE = "new_mouse"
     KEYBOARD = "new_keyboard"
     CHARGER = "new_charger"
     CARTIDGE = "new_or_refill_cartidge"
-    PC ="new_pc"
+    PC = "new_pc"
+    OTHER = "other"
+
+class Complains(Enum):
+    """ A drop-down list of different types of complains if the Ticket Type was Complain """
+    MOBILE_NETWORK = "mobile network connection"
+    PC_NETWORK = "pc network connection"
+    PC_HARDWARE = "pc hardware"
+    PC_SOFTWARE = "pc software"
+    PRINTER = "printer"
+    OTHER = "other"
 
 
 
 class Role(db.Model):
+    """ A table containes different types of roles """
     __tablename__ = "roles"
     id = db.Column(db.Integer, primary_key=True, unique=True)
     role_type = db.Column(db.Enum(RoleType), nullable=False)
@@ -43,6 +58,7 @@ class Role(db.Model):
 
 
 class User(db.Model):
+    """ A table containes employees data """
     __tablename__ = "employees"
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     employee_name = db.Column(db.String(20), nullable=False, unique=True)
@@ -55,6 +71,7 @@ class User(db.Model):
     # roles = db.relationship("Role", backref="user")
 
 class Ticket(db.Model):
+    """ A table that containes all the ticket details """
     __tablename__ = "tickets"
     ticket_id = db.Column(db.Integer, primary_key=True, autoincrement=True, unique=True)
     ticket_type = db.Column(db.Enum(TicketType), nullable=False)
@@ -93,6 +110,7 @@ class Ticket(db.Model):
 
 
 class IT(db.Model):
+    """ A table that containes some ticket details for tech users only """
     __tablename__ = "it_tickets"
     index = db.Column(db.Integer, primary_key=True, autoincrement=True)
     ticket_id = db.Column(db.Integer, db.ForeignKey('tickets.ticket_id'), nullable=False)
@@ -102,6 +120,7 @@ class IT(db.Model):
     update_ticket_details = db.Column(db.Text, nullable=True)
 
 class UserTicket(db.Model):
+    """ A linking table to link between the employee table and the ticket table """
     __tablename__ = "employee_ticket"
     index = db.Column(db.Integer, primary_key=True, autoincrement=True)
     employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'), nullable=False)
