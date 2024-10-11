@@ -60,7 +60,7 @@ class Role(db.Model):
 class User(db.Model):
     """ A table containes employees data """
     __tablename__ = "employees"
-    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    id = db.Column(db.String(5), primary_key=True, nullable=False)
     employee_name = db.Column(db.String(20), nullable=False, unique=True)
     department = db.Column(db.String(20), nullable=False)
     job_title = db.Column(db.String(20), nullable=False)
