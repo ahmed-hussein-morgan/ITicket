@@ -1,10 +1,10 @@
 # type: ignore
-from flask import Flask, render_template, url_for, flash, redirect, session
+from flask import Flask, render_template, url_for, flash, redirect, session, current_app, g
 from flask_sqlalchemy import SQLAlchemy
 from flask_session import Session
 from forms import LoginForm
 import os
-# from models import Ticket, IT, User, Role, UserTicket, RoleType, TicketStatus, TicketType, Requests
+from models import Ticket, IT, User, Role, UserTicket, RoleType, TicketStatus, TicketType, Requests
 from sqlalchemy.sql.expression import func
 from sqlalchemy import text, Index
 from enum import Enum
@@ -24,7 +24,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # configure the database using mysql database for production
-app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{os.environ.get('DEV_USER')}:{os.environ.get('DEV_PASSWORD')}@localhost/{os.environ.get('FULL_TICKETTREK_DEV_DB')}"
+app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{os.environ.get('DEV_USER')}:{os.environ.get('DEV_PASSWORD')}@localhost/{os.environ.get('FULL_ITICKET_DEV_DB')}"
 
 # configure the database using sqlite database for development
 # app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///site.db"
