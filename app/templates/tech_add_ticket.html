@@ -1,0 +1,52 @@
+{% extends "tech_ticket_tab-bar.html" %}
+
+
+{% block content %}
+
+<div id="new-container">
+
+    <form>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-6">
+                    <label for="ticketType" class="form-label">Ticket Type</label>
+                    <select class="form-select">
+                        <option></option>
+                        <option>Request</option>
+                        <option>Complain</option>    
+                    </select>
+                </div>
+                
+                <div class="col-6">
+                    <label for="ticketID" class="form-label">Ticket Number </label>
+                    <input type="text" class="form-control" id="ticketID" placeholder="100" readonly>
+                </div>
+            </div>
+
+            <div>
+                <label for="ticketRequest" class="form-label">Ticket Request</label>
+                <select class="form-select">
+                    <option></option>
+                    <option>Mouse</option>
+                    <option>Keboard</option>
+                    <option>Mobile Network (Complain)</option>
+                    <option>PC Network (Complain)</option> 
+                </select>
+            </div>
+            <div>
+                <label for="ticket-subject" class="form-label">Ticket Title</label>
+                <input type="text" class="form-control" id="ticket-subject" placeholder="Enter a subject for your ticket">
+            </div>
+            <div>
+                <label for="ticket-details" class="form-label">Ticket Details</label>
+                <textarea type="text" class="form-control" id="ticket-details" placeholder="Add more detailes..."></textarea>
+            </div>
+        </div>
+        <div class="sub-bt">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+</div>
+
+{% endblock content %}
