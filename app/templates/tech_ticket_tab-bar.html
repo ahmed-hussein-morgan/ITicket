@@ -1,0 +1,18 @@
+{% extends "tech_nav-bar.html" %}
+
+{% block tabbar %}
+
+<div class="content" id="tabs-bar">
+    <nav class="nav nav-tabs">
+        <a href="{{ url_for('main.new_ticket') }}" class="nav-item nav-link">
+            <i class="bi-plus-square"></i> New Ticket
+        </a>
+        <a href="{{ url_for('main.update_ticket') }}" class="nav-item nav-link">
+            <i class="bi-card-list"></i> Update Ticket
+        </a>
+    </nav>
+</div>
+
+
+
+{% endblock tabbar %}
