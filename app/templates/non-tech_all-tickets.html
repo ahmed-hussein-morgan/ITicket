@@ -1,0 +1,50 @@
+{% extends "non-tech_layer.html" %}
+
+
+{% block content %}
+
+<div id="non-tech_tickets_table">
+    <table class="table table-bordered table-striped ">
+        <thead>
+            <tr>
+                <th scope="col"> Ticket Number </th>
+                <th scope="col"> Category </th>
+                <th scope="col"> Title </th>
+                <th scope="col"> Details </th>
+                <th scope="col"> Submition date </th>
+                <th scope="col"> Status </th>
+                <th scope="col"> Status Date </th>
+                <th scope="col"> IT </th>
+                <th scope="col"> Comment (optional) </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Request</td>
+                <td>Mouse</td>
+                <td>i need new mouse</td>
+                <td>01-01-2024</td>
+                <td>submited</td>
+                <td>01-01-2024</td>
+                <td>Ahmed</td>
+                <td>No comment</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Request</td>
+                <td>Keyboard</td>
+                <td>i need new keyboard</td>
+                <td>05-11-2024</td>
+                <td>submited</td>
+                <td>06-11-2024</td>
+                <td>Ahmed</td>
+                <td>No comment</td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends "base_layer.html" %}
+
+
+
+{% block navbar %}
+
+<div class="nav-bar">
+    <ul>
+        <li> <a class="bi bi-house-door-fill" href="{{ url_for('main.non_tech_new_ticket') }}"> Home </a> </li>
+        <li> <a class="bi bi-person-fill" href="#"> Profile </a> </li>
+        <li> <a class="bi bi-door-open-fill fixed-bottom" href="#"> LogOut </a> </li>
+    </ul>
+</div>
+
+{% endblock navbar %}
+
+{% block tabbar %}
+<div class="content" id="tabs-bar">
+    <nav class="nav nav-tabs">
+        <a href="{{ url_for('main.non_tech_new_ticket') }}" class="nav-item nav-link">
+            <i class="bi-plus-square"></i> New Ticket
+        </a>
+        <a href="{{ url_for('main.all_ticket') }}" class="nav-item nav-link">
+            <i class="bi-card-list"></i> All Tickets
+        </a>
+    </nav>
+</div>
+
+{% endblock tabbar %}
+
+{% block content %}
+
+{% endblock content %}
