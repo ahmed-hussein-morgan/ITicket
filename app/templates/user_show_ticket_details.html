@@ -1,0 +1,50 @@
+{% extends "user_layer.html" %}
+<!-- This is the main page for non-tech user to be showen directly after he/she login -->
+
+{% block content %}
+
+<div id="new-ticket">
+
+    <form>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-6">
+                    <label for="ticketType" class="form-label">Ticket Type</label>
+
+                    <!-- The ticket type selected by user -->
+                    <input type="text" class="form-control" id="ticketType" placeholder="The Type of the selected ticket" readonly>
+
+                </div>
+                
+                <div class="col-6">
+                    <label for="ticketID" class="form-label">Ticket Number </label>
+
+                    <!-- The ticket number found by user search -->
+                    <input type="text" class="form-control" id="ticketID" placeholder="The Number of the selected ticket" readonly>
+                </div>
+            </div>
+
+            <div>
+                <label for="ticketRequest" class="form-label">Ticket Request</label>
+
+                <!-- The ticket Request selected by user -->
+                <input type="text" class="form-control" id="ticketID" placeholder="The ticket Request selected by user" readonly>
+            </div>
+            <div>
+                <label for="ticket-subject" class="form-label">Ticket Title</label>
+
+                <!-- The Title of the selected ticket -->
+                <input type="text" class="form-control" id="ticket-subject" placeholder="The Title of the selected ticket" readonly>
+            </div>
+            <div>
+                <label for="ticket-details" class="form-label">Ticket Details</label>
+
+                <!-- The Details of the selected ticket -->
+                <textarea type="text" class="form-control" id="ticket-details" placeholder="The Details of the selected ticket" readonly></textarea>
+            </div>
+
+    </form>
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends "tech_nav-bar.html" %}
+
+
+{% block tabbar %}
+
+<div class="content" id="tabs-bar">
+    <nav class="nav nav-tabs">
+        <a href="{{ url_for('main.new_user') }}" class="nav-item nav-link">
+            <i class="bi bi-person-plus"></i> New User
+        </a>
+        <a href="{{ url_for('main.update_user') }}" class="nav-item nav-link">
+            <i class="bi-person"></i> Update User
+        </a>
+        <a href="{{ url_for('main.delete_user') }}" class="nav-item nav-link">
+            <i class="bi-person-x"></i> Delete User
+        </a>
+        <a href="{{ url_for('main.all_users') }}" class="nav-item nav-link">
+            <i class="bi-people"></i> All Users
+        </a>
+    </nav>
+</div>
+
+{% endblock tabbar %}
