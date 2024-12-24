@@ -1,0 +1,96 @@
+body {
+    background-color: #f5f5f5;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #003366;
+    position: fixed; /* Make it stick, even on scroll */
+    overflow: auto; /* Enable scrolling if the sidenav has too much content */
+}
+
+li a {
+    display: inline-block;
+    color: whitesmoke;
+    padding: 15px;
+
+}
+
+#tabs-bar {
+    margin-left: 230px;
+    padding-top: 30px;
+    margin-right: 30px;
+}
+
+#new-container {
+    margin-left: 230px;
+    width: 50%;
+}
+
+#update-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    height: 100vh;
+
+}
+
+#search-user,
+#update-user {
+    width: 48%;
+}
+
+#search-ticket,
+#update-ticket {
+    width: 48%;
+}
+
+
+#divider {
+    border: 1px solid #ccc;
+    margin-top: 10%;
+    margin-bottom: 20%;
+    
+}
+
+#search-user {
+    padding-right: 20%;
+}
+
+#search-ticket {
+    padding-right: 20%;
+}
+.sub-bt {
+    margin-top: 20px;
+}
+.form-label {
+    margin-top: 10px;
+}
+.row {
+    margin-top: 10px;
+}
+.ticket-subject {
+    margin-top: 10px;
+}
+
+#non-tech_tickets_table {
+    margin-left: 230px;
+    margin-top: 20px;
+    margin-right: 30px;
+    text-align: center;
+}
+
+#tech_tickets_table {
+    margin-left: 230px;
+    margin-top: 20px;
+    margin-right: 30px;
+    text-align: center;
+}
+
+.nav-item:hover {
+    background-color: white;
+}

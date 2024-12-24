@@ -1,0 +1,27 @@
+{% extends "base_layer.html" %}
+
+{% block content %}
+<h1>Register New User</h1>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.user_id.label }} {{ form.user_id() }}
+    {{ form.user_name.label }} {{ form.user_name() }}
+    {{ form.email.label }} {{ form.email() }}
+    {{ form.password.label }} {{ form.password() }}
+    {{ form.confirm_password.label }} {{ form.confirm_password() }}
+    {{ form.user_type.label }} {{ form.user_type() }}
+    {{ form.user_department.label }} {{ form.user_department() }}
+    {{ form.user_job.label }} {{ form.user_job() }}
+    {{ form.user_branch.label }} {{ form.user_branch() }}
+    {{ form.user_status.label }} {{ form.user_status() }}
+    {{ form.submit() }}
+</form>
+
+{% if error %}
+    <div class="alert alert-danger">
+        {{ error }}
+    </div>
+{% endif %}
+
+{% endblock %}
