@@ -82,24 +82,24 @@ def new_user():
             db.session.add(user)
             db.session.commit()
             
-            flash(f'User created successfully for {form.employee_name.data}.', 'success')
+            flash(f'User created successfully for {form.user_name.data}.', 'success')
 
 
             # Debug logging
 
             #This modification will help you identify if the issue is with the route definition or if there's an exception being raised after the successful database commit.
 
-            import logging
-            logging.info(f"User created successfully. Redirecting to tech_dashboard.")
+            # import logging
+            # logging.info(f"User created successfully. Redirecting to tech_dashboard.")
 
 
 
-            return redirect(url_for('tech_dashboard'))
+            return redirect(url_for('main.tech_dashboard'))
         except Exception as e:
             db.session.rollback()
             error_message = str(e)
             return render_template('register.html', form=form, error=error_message)
-    return render_template('register.html', form=form)      
+    return render_template('tech_add_user.html', form=form, title="ITicket - New User")      
 
 
 @main.route("/update-user", methods=["GET", "POST"])
