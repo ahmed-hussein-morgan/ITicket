@@ -3,7 +3,7 @@ from flask import current_app
 from flask_wtf import FlaskForm 
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, EmailField, SelectField, TextAreaField, IntegerField
 from wtforms.validators import InputRequired, length, Email, EqualTo, DataRequired, ValidationError
-# from ..models import User, Ticket, IT, UserTicket
+from ..models import User, Ticket, IT, UserTicket
 
 
 
@@ -28,6 +28,7 @@ class NewUserForm(FlaskForm):
     email = EmailField("E-mail", validators=[Email(), InputRequired()])
     password = PasswordField('Password', validators=[InputRequired()])
     confirm_password = PasswordField("Confirm Password", validators=[InputRequired(), EqualTo('password', message='Passwords must match')])
+
     # confirm_password = PasswordField("Confirm Password", [validators.InputRequired(), validators.EqualTo(password)])
 
     #update the user type to be a string field based on the drop down list came from front end to be more simple and scalable
@@ -78,6 +79,29 @@ class NewUserForm(FlaskForm):
     # user_status = StringField("User Status", validators=[InputRequired(), length(min=2, max=20)])
     
     submit = SubmitField("Create")
+
+
+    def validate_user_id(self, user_id):
+        id = User.query.filter_by(id=user_id.data).first()
+
+        if id:
+            raise ValidationError("This User ID is already exist. Please choose another one")
+        
+
+    def validate_user_name(self, user_name):
+        name = User.query.filter_by(employee_name=user_name.data).first()
+
+        if name:
+            raise ValidationError("This User Name is already exist. Please choose another one")
+
+        
+    def validate_email(self, email):
+        user_email = User.query.filter_by(email=email.data).first()
+
+        if user_email:
+            raise ValidationError("This Email is already exist. Please choose another one")
+
+
 
 class SearchTicketForm(FlaskForm):
     ticket_number = IntegerField("Ticket Number", validators=[InputRequired()])

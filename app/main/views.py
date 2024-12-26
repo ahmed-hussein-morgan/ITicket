@@ -71,9 +71,7 @@ def new_user():
             user_branch = form.user_branch.data
             user_status = form.user_status.data
             password = form.password.data
-
-
-
+            
             # password = form.password.data
             user = User(id=user_id, employee_name=user_name, department=user_department, job_title=user_job, role_type=user_type, email=email, branch=user_branch, user_status=user_status)
             user.set_password(password)
