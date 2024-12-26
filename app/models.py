@@ -12,7 +12,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 # from flask_bcrypt import Bcrypt 
 # from flask_sqlalchemy import SQLAlchemy
 
-from app import db
+from app import db, login_manager
 
 # db = SQLAlchemy()
 # bcrypt = Bcrypt()

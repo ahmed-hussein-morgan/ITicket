@@ -7,7 +7,8 @@ from sqlalchemy.sql.expression import func
 from sqlalchemy import text, Index
 from config import get_config
 import logging
-from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
+# from flask_bcrypt import Bcrypt
 # from flask_wtf.csrf import CSRFProtect
 
 
@@ -15,7 +16,8 @@ from flask_bcrypt import Bcrypt
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 migrate = Migrate()
-bcrypt = Bcrypt()
+login_manager = LoginManager()
+# bcrypt = Bcrypt()
 # csrf = CSRFProtect()
 
 # Ignore the Role table now from the database scheme for simplicity (recreate and update later )
@@ -260,7 +262,8 @@ def Create_app(config_name='development'):
     bootstrap.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
-    bcrypt.init_app(app)
+    login_manager.init_app(app)
+    # bcrypt.init_app(app)
     # csrf.init_app(app)
 
 

@@ -83,9 +83,14 @@ class NewUserForm(FlaskForm):
 
     def validate_user_id(self, user_id):
         id = User.query.filter_by(id=user_id.data).first()
+        
+        if user_id.data < 1:
+            raise ValidationError("User ID can not be less than 1")
 
-        if id:
+        elif id:
             raise ValidationError("This User ID is already exist. Please choose another one")
+        
+
         
 
     def validate_user_name(self, user_name):
