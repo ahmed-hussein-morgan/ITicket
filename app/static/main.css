@@ -94,3 +94,8 @@ li a {
 .nav-item:hover {
     background-color: white;
 }
+
+.alert {
+    margin-left: 230px;
+    border-radius: 20px;
+}
