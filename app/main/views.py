@@ -1,13 +1,13 @@
 # type: ignore
 from flask import render_template, session, redirect, url_for, flash
 from . import main
-from .. import db, bcrypt
+from .. import db
 from .forms import LoginForm, NewTicketForm, NewUserForm, SearchTicketForm, SearchUserForm
 from app.models import User, Ticket, IT, UserTicket
 
-import logging
-logging.basicConfig()
-logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+# import logging
+# logging.basicConfig()
+# logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
 @main.route("/login", methods=["GET", "POST"])
 @main.route("/", methods=["GET", "POST"])
