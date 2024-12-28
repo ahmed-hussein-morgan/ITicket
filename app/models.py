@@ -64,15 +64,26 @@ from app import db
 
 
 @login_manager.user_loader
-def load_user(id):
+def load_user(user_id):
     """
     The login_manager.user_loader decorator is used to register the function with Flask-Login,
     which will call it when it needs to retrieve information about the logged-in user.
         The user identifier will be passed as a string, so the function converts it to an integer
         before it passes it to the Flask-SQLAlchemy query that loads the user.
     """
-    return User.query.get(int(id))
+    return User.query.get(int(user_id))
 
+
+# @login_manager.user_loader
+# def load_user(id):
+
+#     """
+#     The login_manager.user_loader decorator is used to register the function with Flask-Login,
+#     which will call it when it needs to retrieve information about the logged-in user.
+#         The user identifier will be passed as a string, so the function converts it to an integer
+#         before it passes it to the Flask-SQLAlchemy query that loads the user.
+#     """
+#     return User.query.get(int(id))
 
 
 class User(UserMixin, db.Model):
