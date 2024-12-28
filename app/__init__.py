@@ -278,8 +278,12 @@ def Create_app(config_name='development'):
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
 
+    from .tech import auth as tech_blueprint
+    app.register_blueprint(tech_blueprint, url_prefix='/tech')
 
 
+    from .non_tech import auth as non_tech_blueprint
+    app.register_blueprint(non_tech_blueprint)
 
 
     return app
