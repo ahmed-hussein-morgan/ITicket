@@ -13,7 +13,16 @@ def login():
         user = User.query.filter_by(id=form.user_id.data).first()
         if user and user.check_password(password_hash, form.password.data):
             login_user(user, remember=form.remember.data)
-            user_type = 
+            current_user_type = User.query.filter_by(role_type).first()
+            current_user_name = User.query.filter_by(employee_name).first()
+
+            if current_user_type == "tech":
+                flash(f"Welcome {current_user_name}.", 'success')
+                return redirect(url_for('main.tech_dashboard'))
+            
+            elif current_user_type == "non-tech":
+                flash(f"Welcome {current_user_name}.", 'success')
+                return redirect(url_for('main.all_ticket'))
             
 
     return render_template('auth/login.html')
