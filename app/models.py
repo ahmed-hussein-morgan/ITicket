@@ -6,8 +6,9 @@
 
 from sqlalchemy.sql.expression import func
 from sqlalchemy import text, Index
-
+from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from . import login_manager
 
 # from flask_bcrypt import Bcrypt 
 # from flask_sqlalchemy import SQLAlchemy
@@ -61,7 +62,20 @@ from app import db
 
     # roles = db.relationship("Role", backref="user")
 
-class User(db.Model):
+
+@login_manager.user_loader
+def load_user(id):
+    """
+    The login_manager.user_loader decorator is used to register the function with Flask-Login,
+    which will call it when it needs to retrieve information about the logged-in user.
+        The user identifier will be passed as a string, so the function converts it to an integer
+        before it passes it to the Flask-SQLAlchemy query that loads the user.
+    """
+    return User.query.get(int(id))
+
+
+
+class User(UserMixin, db.Model):
     """ A table containing employees data """
     __tablename__ = "employees"
 
