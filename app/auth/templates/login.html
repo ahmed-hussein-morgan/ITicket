@@ -1,0 +1,58 @@
+{% extends "base_layer.html" %}
+
+{% block content %}
+    <div id="new-container">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend >Login</legend>
+                <div class="form-group">
+                    {{ form.user_id.label(class="form-label") }}
+
+                    {% if form.user_id.errors %}
+                    {{ form.user_id(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.user_id.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.email(class="form-control form-control-lg") }}                    
+                    {% endif %}
+                    
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class="form-label") }}
+
+                    {% if form.password.errors %}
+                    {{ form.password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.password(class="form-control form-control-lg") }}                   
+                    {% endif %}
+
+                </div>
+
+                <div class="form-check">
+                    {{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-label") }}
+                </div>
+
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+            <small class="text-muted">
+                <a href="#">Forgot Password</a>
+                Contact your administrator
+            </small>
+        </form>
+
+    </div>
+
+
+{% endblock content %}

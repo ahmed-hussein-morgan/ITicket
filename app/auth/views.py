@@ -23,6 +23,7 @@ def login():
             elif current_user_type == "non-tech":
                 flash(f"Welcome {current_user_name}.", 'success')
                 return redirect(url_for('main.all_ticket'))
-            
+        else:
+            flash(f"Login Unsuccessful. Please check User ID and password", "dangerous")
 
     return render_template('auth/login.html')

@@ -51,7 +51,23 @@
             {% endwith %} -->
         </div>
     {% block navbar %}{% endblock navbar %}
-    {% block tabbar %}{% endblock tabbar %}
+    {% block tabbar %}
+    <ul class="nav navbar-nav navbar-right ">
+        {% if current_user.is_authenticated %}
+        <li><a class="bi bi-door-open-fill" href="{{ url_for('auth.logout') }}">Log Out</a></li>
+        {% else %}
+        <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+        {% endif %}
+    </ul>
+
+    <!-- <ul class="nav navbar-nav navbar-right">
+        {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+        {% else %}
+        <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+        {% endif %}
+    </ul> -->
+    {% endblock tabbar %}
     {% block content %}{% endblock content %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
