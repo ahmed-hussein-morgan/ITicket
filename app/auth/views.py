@@ -6,7 +6,7 @@ from ..models import User
 from .forms import LoginForm
 
 
-@auth.route('/login', method=['GET', 'POST'])
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
