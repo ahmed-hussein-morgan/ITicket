@@ -269,6 +269,8 @@ def Create_app(config_name='development'):
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
+    login_manager.login_view = 'login'
+    login_manager.login_message_category = 'info'
     # bcrypt.init_app(app)
     # csrf.init_app(app)
 
