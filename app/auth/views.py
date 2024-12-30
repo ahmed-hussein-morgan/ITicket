@@ -5,7 +5,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from ..models import User
 from .forms import LoginForm
 
-
+@auth.route('/', methods=['GET', 'POST'])
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -29,7 +29,7 @@ def login():
                     return redirect(next_page)
                 return redirect(url_for('main.all_ticket'))
         else:
-            flash(f"Login Unsuccessful. Please check User ID and password", "dangerous")
+            flash(f"Login Failed. Please check User ID and password", "dangerous")
 
     return render_template('auth/login.html')
 

@@ -9,30 +9,30 @@ from app.models import User, Ticket, IT, UserTicket
 # logging.basicConfig()
 # logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
-@main.route("/login", methods=["GET", "POST"])
-@main.route("/", methods=["GET", "POST"])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
+# @main.route("/login", methods=["GET", "POST"])
+# @main.route("/", methods=["GET", "POST"])
+# def login():
+#     form = LoginForm()
+#     if form.validate_on_submit():
 
-        if form.email.data == "admin@iticket.com" and form.password.data == "password":
+#         if form.email.data == "admin@iticket.com" and form.password.data == "password":
 
-            # session["email"] = request.form.get("email")
+#             # session["email"] = request.form.get("email")
 
-            session["email"] = form.email.data
+#             session["email"] = form.email.data
 
-            # flashed messaag below is using email data temporarly until we update the register form and database to get the 
-            # username instead 
-            flash(f"Welcome {form.email.data}!", 'success')
+#             # flashed messaag below is using email data temporarly until we update the register form and database to get the 
+#             # username instead 
+#             flash(f"Welcome {form.email.data}!", 'success')
 
-            # redireced below is to the home page temporarly until we update the database to redirect the user to his home
-            # page based on the user type (tech/non-tech)
-            return redirect(url_for('home'))
+#             # redireced below is to the home page temporarly until we update the database to redirect the user to his home
+#             # page based on the user type (tech/non-tech)
+#             return redirect(url_for('home'))
 
-        else:
-            flash("Login Unsuccessful. Please check username and password", "danger")
+#         else:
+#             flash("Login Unsuccessful. Please check username and password", "danger")
 
-    return render_template("login.html", title="ITicket - Login", form=form)
+#     return render_template("login.html", title="ITicket - Login", form=form)
 
 @main.route("/home", methods=["GET", "POST"])
 @main.route("/new-ticket", methods=["GET", "POST"])

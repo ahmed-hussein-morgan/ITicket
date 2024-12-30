@@ -2,25 +2,38 @@
 from flask import current_app
 from flask_wtf import FlaskForm 
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, EmailField, SelectField, TextAreaField, IntegerField
-from wtforms.validators import InputRequired, length, Email, EqualTo, DataRequired, ValidationError
+from wtforms.validators import InputRequired, length, Email, EqualTo, ValidationError
 from ..models import User, Ticket, IT, UserTicket
 
 
-
+# Done
 class LoginForm(FlaskForm):
     user_id = StringField('User ID', validators=[InputRequired(), length(1, 6)])
     password = PasswordField('Password', validators=[InputRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
+# In progress
 class NewTicketForm(FlaskForm):
+    ticket_number = Ticket.query.filter_by(ticket_id).last()
+    if ticket_number is None or ticket_number == 0:
+        ticket_number = 1
+    else:
+        ticket_number += 1
+
+    id = IntegerField("Ticket ID", validators=[InputRequired, length(1, 6)], default=ticket_number, render_kw={'readonly': True})
+    ticket_branch = SelectField("Ticket Branch", choices=["", "Head Quarter", "Heliopolis", "Nasr City", "New Cairo", "6th October"], validate_choice=True, validators=[InputRequired()])   
     category = SelectField("Category", choices=["Mobile network connection", "PC network connection",\
          "PC hardware", "PC software", "Printer"],\
-         validators=[InputRequired(), ])
+         validators=[InputRequired()],  validate_choice=True)
     title = StringField("Title", validators=[InputRequired(), length(max=50)])
     ticket_details = TextAreaField("Details", validators=[InputRequired()])
     submit = SubmitField('Submit')
 
+
+
+
+# Done
 class NewUserForm(FlaskForm):
     # user_id = StringField("User ID", validators=[InputRequired()])
     user_id = IntegerField("User ID", validators=[InputRequired()])
