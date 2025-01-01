@@ -7,11 +7,11 @@ from ..models import User, Ticket, IT, UserTicket
 
 
 # Done
-class LoginForm(FlaskForm):
-    user_id = StringField('User ID', validators=[InputRequired(), length(1, 6)])
-    password = PasswordField('Password', validators=[InputRequired()])
-    remember = BooleanField('Remember Me')
-    submit = SubmitField('Login')
+# class LoginForm(FlaskForm):
+#     user_id = StringField('User ID', validators=[InputRequired(), length(1, 6)])
+#     password = PasswordField('Password', validators=[InputRequired()])
+#     remember = BooleanField('Remember Me')
+#     submit = SubmitField('Login')
 
 # In progress
 class NewTicketForm(FlaskForm):
