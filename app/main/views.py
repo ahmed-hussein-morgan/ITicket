@@ -2,8 +2,10 @@
 from flask import render_template, session, redirect, url_for, flash
 from . import main
 from .. import db
-from .forms import LoginForm, NewTicketForm, NewUserForm, SearchTicketForm, SearchUserForm
+from .forms import NewTicketForm, NewUserForm, SearchTicketForm, SearchUserForm
 from app.models import User, Ticket, IT, UserTicket
+from flask_login import login_user, logout_user, login_required, current_user
+from ..auth.forms import LoginForm
 
 # import logging
 # logging.basicConfig()
@@ -58,7 +60,15 @@ def update_ticket():
     return render_template("tech_update_ticket.html", title="ITicket - User Dashboard")
 
 @main.route("/new-user", methods=["GET", "POST"])
+@login_required
 def new_user():
+
+    # Check if the current user has permission to create new users
+    if not current_user.is_authenticated or not current_user.has_permission_to_create_users():
+        flash("You don't have permission to create new users.", "warning")
+        return redirect(url_for('auth.login'))
+
+
     form = NewUserForm()
     if form.validate_on_submit():
         try:
