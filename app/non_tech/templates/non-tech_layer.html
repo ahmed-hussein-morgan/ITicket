@@ -15,6 +15,15 @@
 {% endblock navbar %}
 
 {% block tabbar %}
+
+<div id="flash">
+    {% for message in get_flashed_messages(with_categories=true) %}
+    <div class="alert alert-{{ message[0] }}">
+        {{ message[1] }}
+    </div>
+    {%endfor%}
+</div>
+
 <div class="content" id="tabs-bar">
     <nav class="nav nav-tabs">
         <a href="{{ url_for('non_tech.non_tech_new_ticket') }}" class="nav-item nav-link">

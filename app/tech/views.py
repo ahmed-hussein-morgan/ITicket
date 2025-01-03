@@ -4,7 +4,7 @@ from . import tech
 from flask_login import login_user, logout_user, login_required, current_user
 from ..models import User
 from .forms import NewUserForm, SearchTicketForm, SearchUserForm
-
+from .. import db
 
 @tech.route("/tech-dashboard")
 def tech_dashboard():
@@ -25,9 +25,9 @@ def update_ticket():
 def new_user():
 
     # Check if the current user has permission to create new users
-    if not current_user.is_authenticated or not current_user.has_permission_to_create_users():
-        flash("You don't have permission to create new users.", "warning")
-        return redirect(url_for('auth.login'))
+    # if not current_user.is_authenticated or not current_user.has_permission_to_create_users():
+    #     flash("You don't have permission to create new users.", "warning")
+    #     return redirect(url_for('auth.login'))
 
 
     form = NewUserForm()
@@ -63,7 +63,7 @@ def new_user():
 
 
 
-            return redirect(url_for('main.tech_dashboard'))
+            return redirect(url_for('tech.all_users'))
         except Exception as e:
             db.session.rollback()
             error_message = str(e)

@@ -3,6 +3,14 @@
 
 {% block tabbar %}
 
+<div id="flash">
+    {% for message in get_flashed_messages(with_categories=true) %}
+    <div class="alert alert-{{ message[0] }}">
+        {{ message[1] }}
+    </div>
+    {%endfor%}
+</div>
+
 <div class="content" id="tabs-bar">
     <nav class="nav nav-tabs">
         <a href="{{ url_for('tech.new_user') }}" class="nav-item nav-link">
