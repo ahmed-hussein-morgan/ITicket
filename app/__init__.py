@@ -7,6 +7,7 @@ from sqlalchemy.sql.expression import func
 from sqlalchemy import text, Index
 from config import get_config
 import logging
+from werkzeug.security import generate_password_hash
 #from flask_login import LoginManager
 
 # from flask_bcrypt import Bcrypt
@@ -22,7 +23,9 @@ migrate = Migrate()
 
 # The login_view attribute of the LoginManager object sets the endpoint for the login page.
 
-login_manager.login_view = 'auth.login'
+# login_manager.login_view = 'auth.login'
+
+
 # bcrypt = Bcrypt()
 # csrf = CSRFProtect()
 
@@ -274,7 +277,7 @@ def Create_app(config_name='development'):
     # login_manager.login_view = 'auth.login'
     # login_manager.login_message_category = 'info'
 
-    
+
     # bcrypt.init_app(app)
     # csrf.init_app(app)
 
@@ -294,5 +297,39 @@ def Create_app(config_name='development'):
         db.create_all()  # This will create tables for all defined models
         print("All tables created successfully.")
 
+        # Create daemon tech user - a tech user created by default after creating the database for testing 
+        # to allow the new app user to login to the app and test all feature 
+        # allowed only into the development phase
+        create_daemon_tech_user()
+
 
     return app
+
+
+def create_daemon_tech_user():
+    from app.models import User
+
+    # Check if the daemon tech user already exists
+    daemon_user = User.query.filter_by(employee_name='daemon_tech').first()
+    
+    if not daemon_user:
+        # Create the daemon tech user
+        new_user = User(
+            id=1,  
+            employee_name='daemon_tech',
+            department='IT',
+            job_title='Tech Support',
+            email='daemon_tech@example.com',
+            role_type='tech',
+            password_hash=generate_password_hash('daemon_tech_password'),
+            branch='Head Quarter',
+            user_status='Enabled'
+        )
+        
+        # Add the user to the session and commit
+        db.session.add(new_user)
+        db.session.commit()
+        
+        print("Daemon tech user created successfully.")
+    else:
+        print("Daemon tech user already exists.")

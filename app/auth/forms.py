@@ -8,7 +8,7 @@ from ..models import User, Ticket, IT, UserTicket
 
 
 class LoginForm(FlaskForm):
-    user_id = StringField('User ID', validators=[InputRequired(), length(1, 6)])
+    user_name = StringField('User Name', validators=[InputRequired(), length(max=18)])
     password = PasswordField('Password', validators=[InputRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
