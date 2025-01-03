@@ -7,7 +7,7 @@ from sqlalchemy.sql.expression import func
 from sqlalchemy import text, Index
 from config import get_config
 import logging
-from flask_login import LoginManager
+#from flask_login import LoginManager
 
 # from flask_bcrypt import Bcrypt
 # from flask_wtf.csrf import CSRFProtect
@@ -17,7 +17,7 @@ from flask_login import LoginManager
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 migrate = Migrate()
-login_manager = LoginManager()
+#login_manager = LoginManager()
 
 
 # The login_view attribute of the LoginManager object sets the endpoint for the login page.
@@ -268,9 +268,13 @@ def Create_app(config_name='development'):
     bootstrap.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
-    login_manager.init_app(app)
-    login_manager.login_view = 'auth.login'
-    login_manager.login_message_category = 'info'
+
+
+    # login_manager.init_app(app)
+    # login_manager.login_view = 'auth.login'
+    # login_manager.login_message_category = 'info'
+
+    
     # bcrypt.init_app(app)
     # csrf.init_app(app)
 
