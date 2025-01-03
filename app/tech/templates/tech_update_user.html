@@ -1,0 +1,138 @@
+{% extends "tech_user_tab-bar.html" %}
+
+
+{% block content %}
+
+<div id="update-container" class="container">
+
+    <div id="search-user" class="child">
+
+        <form>
+
+            <div class="form-group">
+                <div>
+                    <label class="form-label"> User ID </label>
+                    <input type="text" class="form-control" placeholder="User ID">
+                </div>
+
+                <div>
+                    <label class="form-label"> User Name </label>
+                    <input type="text" class="form-control" placeholder="User Name">
+                </div>
+
+            </div>
+            <div class="sub-bt">
+                <button type="submit" class="btn btn-primary">Find User</button>
+            </div>
+        </form>
+
+    </div>
+
+    <div id="divider"></div>
+
+    <div id="update-user" class="child">
+
+        <form>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-6">
+                        <label class="form-label"> User ID </label>
+                        <input type="text" class="form-control" placeholder="User ID">
+                    </div>
+        
+                    <div class="col-6">
+                        <label class="form-label"> User Name </label>
+                        <input type="text" class="form-control" placeholder="User Name">
+                    </div>
+                </div>
+
+    
+                <div>
+                    <label class="form-label"> E-mail </label>
+                    <input type="text" class="form-control" placeholder="E-mail">
+                </div>
+                
+                <div class="row">
+
+                    <div class="col-6">
+                        <label class="form-label"> User Password </label>
+                        <input type="text" class="form-control">
+                    </div>
+        
+                    <div class="col-6">
+                        <label class="form-label"> Confirm Password</label>
+                        <input type="text" class="form-control">
+                    </div>
+
+                </div>                    
+    
+                <div>
+                    <label class="form-label">User Type</label>
+                    <select class="form-select">
+                        <option></option>
+                        <option>Tech</option>
+                        <option>Non-Tech</option>    
+                    </select>
+                </div>
+    
+                <div class="row">
+
+                    <div>
+                        <label class="form-label"> User Department</label>
+                        <select class="form-select">
+                            <option></option>
+                            <option>Accountant</option>
+                            <option>Sales</option>
+                            <option>HR</option> 
+                            <option>IT</option>  
+                            <option>Admin</option>
+                            <option>Stock Control</option>
+                            <option>Supply Chain</option>
+                            <option>Operation</option>
+                            <option>Quality Control</option>
+                        </select>
+                    </div>
+        
+                    <div>
+                        <label class="form-label"> User Title</label>
+                        <input type="text" class="form-control">
+                    </div>
+
+                </div>
+
+                
+    
+                <div>
+                    <label class="form-label">User Branch</label>
+                    <select class="form-select">
+                        <option></option>
+                        <option>Head Quarter</option>
+                        <option>Heliopolis</option>
+                        <option>Nasr City</option>
+                        <option>New Cairo</option> 
+                        <option>6th October</option>    
+                    </select>
+                </div>
+    
+                <div>
+                    <label class="form-label">User Status</label>
+                    <select class="form-select">
+                        <option></option>
+                        <option>Enabled</option>
+                        <option>Disabled</option>    
+                    </select>
+                </div>
+    
+            </div>
+            <div class="sub-bt">
+                <button type="submit" class="btn btn-primary">Update User</button>
+            </div>
+        </form>
+    
+    </div>
+
+
+</div>
+
+
+{% endblock content %}

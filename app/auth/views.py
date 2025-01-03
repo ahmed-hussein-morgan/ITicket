@@ -1,6 +1,7 @@
 # type: ignore
 from flask import render_template, redirect, request, url_for, flash
 from . import auth
+from .. import tech, non_tech
 from flask_login import login_user, logout_user, login_required, current_user
 from ..models import User
 from .forms import LoginForm
@@ -22,13 +23,13 @@ def login():
                 flash(f"Welcome {current_user_name}.", 'success')
                 if next_page and next_page.startswith('/'):
                     return redirect(next_page)
-                return redirect(url_for('main.tech_dashboard'))
+                return redirect(url_for('tech.tech_dashboard'))
             
             elif current_user_type == "non-tech":
                 flash(f"Welcome {current_user_name}.", 'success')
                 if next_page and next_page.startswith('/'):
                     return redirect(next_page)
-                return redirect(url_for('main.all_ticket'))
+                return redirect(url_for('non_tech.all_ticket'))
         else:
             flash(f"Login Failed. Please check User ID and password", "dangerous")
 

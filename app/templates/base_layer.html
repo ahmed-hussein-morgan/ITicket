@@ -31,7 +31,29 @@
         with_categories=true ==> return a tuple of 2 items 
             first item in this tuple -> is the category passed to the flash() method in the view
             second item in this tuple -> is the flash message itself wrote in the flash method -->
-        <div>
+        <!-- <div> -->
+        <!-- <div class="col-md-8"> -->
+            <!-- {% for message in get_flashed_messages(with_categories=true) %}
+            <div class="alert alert-{{ message[0] }}">
+                {{ message[1] }}
+            </div>
+            {%endfor%} -->
+
+            <!-- another way to print flash message -->
+            <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %} -->
+        <!-- </div> -->
+    {% block navbar %}{% endblock navbar %}
+    {% block tabbar %}
+
+    <div>
         <!-- <div class="col-md-8"> -->
             {% for message in get_flashed_messages(with_categories=true) %}
             <div class="alert alert-{{ message[0] }}">
@@ -50,15 +72,13 @@
                 {% endif %}
             {% endwith %} -->
         </div>
-    {% block navbar %}{% endblock navbar %}
-    {% block tabbar %}
-    <ul class="nav navbar-nav navbar-right ">
+    <!-- <ul class="nav navbar-nav navbar-right ">
         {% if current_user.is_authenticated %}
         <li><a class="bi bi-door-open-fill" href="{{ url_for('auth.logout') }}">Log Out</a></li>
         {% else %}
         <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
         {% endif %}
-    </ul>
+    </ul> -->
 
     <!-- <ul class="nav navbar-nav navbar-right">
         {% if current_user.is_authenticated %}
@@ -71,5 +91,5 @@
     {% block content %}{% endblock content %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-</body>2
+</body>
 </html>

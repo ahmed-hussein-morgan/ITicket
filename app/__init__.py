@@ -282,16 +282,23 @@ def Create_app(config_name='development'):
     # csrf.init_app(app)
 
 
-    from .main import main as main_blueprint  # Import blueprint
-    app.register_blueprint(main_blueprint)
+    # from .main import main as main_blueprint  # Import blueprint
+    # app.register_blueprint(main_blueprint)
 
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
 
+    from .tech import tech as tech_blueprint
+    app.register_blueprint(tech_blueprint)
 
-        # Create tables within the app context
+
+    from .non_tech import non_tech as non_tech_blueprint
+    app.register_blueprint(non_tech_blueprint)
+
+
+    # Create tables within the app context
     with app.app_context():
         print("Creating tables...")
         db.create_all()  # This will create tables for all defined models

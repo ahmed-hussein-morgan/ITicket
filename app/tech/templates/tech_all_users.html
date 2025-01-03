@@ -1,0 +1,47 @@
+{% extends "tech_user_tab-bar.html" %}
+
+
+{% block content %}
+
+<div id="tech_tickets_table">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th scope="col"> User ID </th>
+                <th scope="col"> User Name </th>
+                <th scope="col"> User Password </th>
+                <th scope="col"> User Department </th>
+                <th scope="col"> User Job </th>
+                <th scope="col"> User E-mail </th>
+                <th scope="col"> User Branch </th>
+                <th scope="col"> User Status </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>250</td>
+                <td>Ahmed Mostafa</td>
+                <td>******</td>
+                <td>Accountant</td>
+                <td>General Accountant</td>
+                <td>ahmed.mostafa@gmail.com</td>
+                <td>Heliopolis</td>
+                <td>Enabled</td>
+            </tr>
+            <tr>
+                <td>49</td>
+                <td>Mohamed Kamal</td>
+                <td>******</td>
+                <td>Operation</td>
+                <td>Team Leader</td>
+                <td>mohamed.kamal@gmail.com</td>
+                <td>New Cairo</td>
+                <td>Disabled</td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,135 @@
+{% extends "non-tech_layer.html" %}
+
+
+{% block content %}
+
+<div id="new-container">
+
+    <form>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-6">
+                    <!-- <label for="ticketType" class="form-label">Ticket Type</label>
+                    <select class="form-select">
+                        <option></option>
+                        <option>Request</option>
+                        <option>Complain</option>    
+                    </select> -->
+                    {{ form.ticket_type.label(class="form-label") }}
+                    {% if form.ticket_type.errors %}
+                    {{ form.ticket_type(class="form-control form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.ticket_type.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.ticket_type(class="form-control form-control") }}                    
+                {% endif %}
+                </div>
+                
+                <div class="col-6">
+                    <!-- <label for="ticketID" class="form-label">Ticket Number </label>
+                    <input type="text" class="form-control" id="ticketID" placeholder="100" readonly> -->
+                    {{ form.id.label(class="form-label") }}
+                    {% if form.id.errors %}
+                    {{ form.id(class="form-control form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.id.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{ form.id(class="form-control form-control") }}                    
+                    {% endif %}                    
+
+                </div>
+            </div>
+
+            <div>
+                <!-- <label for="ticket-branch" class="form-label">Ticket Branch</label>
+                <select class="form-select">
+                    <option></option>
+                    <option>Head Quarter</option>
+                    <option>Heliopolis</option>
+                    <option>Nasr City (Complain)</option>
+                    <option>Water Way (Complain)</option> 
+                </select> -->
+                {{ form.ticket_branch.label(class="form-label") }}
+                {% if form.ticket_branch.errors %}
+                {{ form.ticket_branch(class="form-control form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.ticket_branch.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                    {{ form.ticket_branch(class="form-control form-control") }}                    
+                {% endif %} 
+            </div>
+
+            <div>
+                <!-- <label for="ticketRequest" class="form-label">Ticket Request</label>
+                <select class="form-select">
+                    <option></option>
+                    <option>Mouse</option>
+                    <option>Keboard</option>
+                    <option>Mobile Network (Complain)</option>
+                    <option>PC Network (Complain)</option> 
+                </select> -->
+
+                {{ form.category.label(class="form-label") }}
+                {% if form.category.errors %}
+                {{ form.category(class="form-control form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.category.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                    {{ form.category(class="form-control form-control") }}                    
+                {% endif %} 
+            </div>
+            <div>
+                <!-- <label for="ticket-subject" class="form-label">Ticket Title</label>
+                <input type="text" class="form-control" id="ticket-subject" placeholder="Enter a subject for your ticket"> -->
+
+                {{ form.title.label(class="form-label") }}
+                {% if form.title.errors %}
+                {{ form.title(class="form-control form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.title.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                    {{ form.title(class="form-control form-control") }}                    
+                {% endif %} 
+
+            </div>
+            <div>
+                <!-- <label for="ticket-details" class="form-label">Ticket Details</label>
+                <textarea type="text" class="form-control" id="ticket-details" placeholder="Add more detailes..."></textarea> -->
+
+                {{ form.ticket_details.label(class="form-label") }}
+                {% if form.ticket_details.errors %}
+                {{ form.ticket_details(class="form-control form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.ticket_details.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                    {{ form.ticket_details(class="form-control form-control") }}                    
+                {% endif %}                
+
+            </div>
+        </div>
+        <div class="sub-bt">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+</div>
+
+{% endblock content %}
