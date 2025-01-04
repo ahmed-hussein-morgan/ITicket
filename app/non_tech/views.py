@@ -8,8 +8,9 @@ from .forms import NewTicketForm
 
 @non_tech.route("/new-ticket", methods=["GET", "POST"])
 def non_tech_new_ticket():
-    return render_template("non-tech_add_ticket.html", title="ITicket - New Ticket")
+    
+    return render_template("non-tech_add_ticket.html", title="ITicket - New Ticket", form=form)
 
 @non_tech.route("/all-tickets")
 def all_ticket():
-    return render_template("non-tech_all-tickets.html", title="ITicket - User Dashboard")
+    return render_template("non-tech_all-tickets.html", title="ITicket - User Dashboard", form=form)

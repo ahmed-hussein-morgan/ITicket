@@ -20,26 +20,18 @@
         </thead>
 
         <tbody>
+            {% for user in users %}
             <tr>
-                <td>250</td>
-                <td>Ahmed Mostafa</td>
-                <td>******</td>
-                <td>Accountant</td>
-                <td>General Accountant</td>
-                <td>ahmed.mostafa@gmail.com</td>
-                <td>Heliopolis</td>
-                <td>Enabled</td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.employee_name }}</td>
+                <td> ****** </td>
+                <td>{{ user.department }}</td>
+                <td>{{ user.job_title }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.branch }}</td>
+                <td>{{ user.user_status }}</td>
             </tr>
-            <tr>
-                <td>49</td>
-                <td>Mohamed Kamal</td>
-                <td>******</td>
-                <td>Operation</td>
-                <td>Team Leader</td>
-                <td>mohamed.kamal@gmail.com</td>
-                <td>New Cairo</td>
-                <td>Disabled</td>
-            </tr>
+            {% endfor %}
         </tbody>
 
     </table>

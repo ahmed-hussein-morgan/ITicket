@@ -82,4 +82,5 @@ def delete_user():
 
 @tech.route("/all-users", methods=["GET", "POST"])
 def all_users():
-    return render_template("tech_all_users.html", title="ITicket - User Dashboard")
+    users = User.query.all()
+    return render_template("tech_all_users.html", title="ITicket - All Users", users=users)
