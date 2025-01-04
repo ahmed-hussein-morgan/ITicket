@@ -2,8 +2,8 @@
 from flask import render_template, redirect, request, url_for, flash
 from . import tech
 from flask_login import login_user, logout_user, login_required, current_user
-from ..models import User
-from .forms import NewUserForm, SearchTicketForm, SearchUserForm
+from ..models import User, Ticket, IT, UserTicket
+from .forms import NewUserForm, SearchTicketForm, SearchUserForm, NewTicketForm
 from .. import db
 
 @tech.route("/tech-dashboard")
@@ -13,7 +13,35 @@ def tech_dashboard():
 
 @tech.route("/new-tech-ticket", methods=["GET", "POST"])
 def tech_new_ticket():
-    return render_template("tech_add_ticket.html", title="ITicket - New Ticket")
+    form=NewTicketForm()
+    if form.validate_on_submit():
+        try:
+            # ticket_number
+            # form.generate_ticket_number()
+            ticket_number = form.ticket_number.data
+            ticket_branch = form.ticket_branch.data
+            ticket_type = form.ticket_type.data
+            category = form.category.data
+            title = form.title.data
+            ticket_details = form.ticket_details.data
+            
+            # password = form.password.data
+            ticket = Ticket(ticket_id=ticket_number, ticket_branch=ticket_branch, ticket_type=ticket_type,\
+                            ticket_category=category, ticket_title=title, ticket_details=ticket_details)
+            
+            
+            
+            db.session.add(ticket)
+            db.session.commit()
+            
+            flash(f'Ticket created successfully. Your ticket number is: {form.ticket_number.data}.', 'success')
+            return redirect(url_for('tech.tech_dashboard'))
+        except Exception as e:
+            db.session.rollback()
+            error_message = str(e)
+            return render_template('register.html', form=form, error=error_message)
+        
+    return render_template("tech_add_ticket.html", title="ITicket - New Ticket", form=form)
 
 
 @tech.route("/update-ticket", methods=["GET", "POST"])
@@ -75,10 +103,11 @@ def new_user():
 def update_user():
     return render_template("tech_update_user.html", title="ITicket - User Dashboard")
 
-
-@tech.route("/delete-user", methods=["GET", "POST"])
-def delete_user():
-    return render_template("tech_delete_user.html", title="ITicket - User Dashboard")
+# Replace deleting the user by updating its status (Enable/Disable) to keep all users data.
+#       "Delete" feature could be added into the next version when creating the "Manager" user_type.
+# @tech.route("/delete-user", methods=["GET", "POST"])
+# def delete_user():
+#     return render_template("tech_delete_user.html", title="ITicket - User Dashboard")
 
 @tech.route("/all-users", methods=["GET", "POST"])
 def all_users():

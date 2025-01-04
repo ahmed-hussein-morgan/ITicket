@@ -31,16 +31,16 @@
                 <div class="col-6">
                     <!-- <label for="ticketID" class="form-label">Ticket Number </label>
                     <input type="text" class="form-control" id="ticketID" placeholder="100" readonly> -->
-                    {{ form.id.label(class="form-label") }}
-                    {% if form.id.errors %}
-                    {{ form.id(class="form-control form-control is-invalid") }}
+                    {{ form.ticket_number.label(class="form-label") }}
+                    {% if form.ticket_number.errors %}
+                    {{ form.ticket_number(class="form-control form-control is-invalid") }}
                     <div class="invalid-feedback">
-                        {% for error in form.id.errors %}
+                        {% for error in form.ticket_number.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                     {% else %}
-                        {{ form.id(class="form-control form-control") }}                    
+                        {{ form.ticket_number(class="form-control form-control", readonly=true) }}                    
                     {% endif %}                    
 
                 </div>

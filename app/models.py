@@ -204,9 +204,10 @@ class Ticket(db.Model):
 
     __table_args__ = {'extend_existing': True}
 
-    ticket_id = db.Column(db.Integer, primary_key=True, autoincrement=True, unique=True)
+    ticket_id = db.Column(db.Integer, primary_key=True, autoincrement=False, unique=True)
     ticket_branch = ticket_type = db.Column(db.String(20), nullable=False)
     ticket_type = db.Column(db.String(20), nullable=False)
+    ticket_category = db.Column(db.String(50), nullable=False)
     ticket_title = db.Column(db.String(100), nullable=True)
     ticket_details = db.Column(db.Text, nullable=True)
     submission_date = db.Column(db.Date, nullable=False, default=func.now().cast(db.Date))
