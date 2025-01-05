@@ -8,6 +8,7 @@ from sqlalchemy.sql.expression import func
 from sqlalchemy import text, Index
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime, timezone
 #from . import login_manager
 
 # from flask_bcrypt import Bcrypt 
@@ -210,8 +211,18 @@ class Ticket(db.Model):
     ticket_category = db.Column(db.String(50), nullable=False)
     ticket_title = db.Column(db.String(100), nullable=True)
     ticket_details = db.Column(db.Text, nullable=True)
-    submission_date = db.Column(db.Date, nullable=False, default=func.now().cast(db.Date))
-    submission_time = db.Column(db.Time, nullable=False, default=text("TIME(CURRENT_TIMESTAMP)"))
+
+    #submission_date = db.Column(db.Date, nullable=False, default=func.now().cast(db.Date))
+    # submission_date = db.Column(db.Date, nullable=True, default=func.now().cast(db.Date))
+
+    submission_datetime = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.now(timezone.utc))
+
+    #submission_time = db.Column(db.Time, nullable=False, default=text("TIME(CURRENT_TIMESTAMP)"))
+    # submission_time = db.Column(db.Time, nullable=True, default=text("TIME(CURRENT_TIMESTAMP)"))
+
+    # submission_time = db.Column(db.String(15), nullable=False)
+
+
     ticket_status = db.Column(db.String(20), nullable=False, default="Submitted")
     tickets = db.relationship("IT", backref=db.backref("ticket", lazy=True))
 

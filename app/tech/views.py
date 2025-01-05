@@ -1,10 +1,11 @@
 # type: ignore
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, current_app
 from . import tech
 from flask_login import login_user, logout_user, login_required, current_user
 from ..models import User, Ticket, IT, UserTicket
 from .forms import NewUserForm, SearchTicketForm, SearchUserForm, NewTicketForm
 from .. import db
+from datetime import datetime, timezone
 
 @tech.route("/tech-dashboard")
 def tech_dashboard():
@@ -14,6 +15,19 @@ def tech_dashboard():
 @tech.route("/new-tech-ticket", methods=["GET", "POST"])
 def tech_new_ticket():
     form=NewTicketForm()
+
+    # Generate ticket number
+    with current_app.app_context():
+        latest_ticket = Ticket.query.order_by(Ticket.ticket_id.desc()).first()
+        if latest_ticket:
+            form.ticket_number.data = latest_ticket.ticket_id + 1
+        else:
+            form.ticket_number.data = 1
+
+
+    # Get current UTC time
+    current_datetime = datetime.now(timezone.utc)
+
     if form.validate_on_submit():
         try:
             # ticket_number
@@ -26,8 +40,15 @@ def tech_new_ticket():
             ticket_details = form.ticket_details.data
             
             # password = form.password.data
-            ticket = Ticket(ticket_id=ticket_number, ticket_branch=ticket_branch, ticket_type=ticket_type,\
-                            ticket_category=category, ticket_title=title, ticket_details=ticket_details)
+            ticket = Ticket(
+                ticket_id=ticket_number,
+                ticket_branch=ticket_branch,
+                ticket_type=ticket_type,
+                ticket_category=category,
+                ticket_title=title,
+                ticket_details=ticket_details,
+                submission_datetime=current_datetime
+                )
             
             
             

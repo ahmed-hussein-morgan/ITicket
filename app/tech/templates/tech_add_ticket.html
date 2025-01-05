@@ -5,7 +5,9 @@
 
 <div id="new-container">
 
-    <form>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        
         <div class="form-group">
             <div class="row">
                 <div class="col-6">
@@ -27,11 +29,16 @@
                     {{ form.ticket_type(class="form-control form-control") }}                    
                 {% endif %}
                 </div>
-                
+
                 <div class="col-6">
+                    <label for="ticketID" class="form-label">Ticket Number</label>
+                    <input type="text" id="ticketID" name="ticket_number" class="form-control" readonly value="{{ form.ticket_number.data }}">
+                </div>
+                
+                <!-- <div class="col-6"> -->
                     <!-- <label for="ticketID" class="form-label">Ticket Number </label>
                     <input type="text" class="form-control" id="ticketID" placeholder="100" readonly> -->
-                    {{ form.ticket_number.label(class="form-label") }}
+                    <!-- {{ form.ticket_number.label(class="form-label") }}
                     {% if form.ticket_number.errors %}
                     {{ form.ticket_number(class="form-control form-control is-invalid") }}
                     <div class="invalid-feedback">
@@ -43,7 +50,7 @@
                         {{ form.ticket_number(class="form-control form-control", readonly=true) }}                    
                     {% endif %}                    
 
-                </div>
+                </div> -->
             </div>
 
             <div>

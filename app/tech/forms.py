@@ -1,7 +1,7 @@
 # type: ignore
 from flask import current_app
 from flask_wtf import FlaskForm 
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, EmailField, SelectField, TextAreaField, IntegerField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, EmailField, SelectField, TextAreaField, IntegerField,HiddenField
 from wtforms.validators import InputRequired, length, Email, EqualTo, DataRequired, ValidationError
 from ..models import User, Ticket, IT, UserTicket
 
@@ -115,17 +115,19 @@ class NewTicketForm(FlaskForm):
 
     ticket_number = IntegerField("Ticket ID", render_kw={'readonly': True}) 
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.generate_ticket_number()
+    ticket_number = HiddenField("Ticket ID")
 
-    def generate_ticket_number(self):
-        with current_app.app_context():
-            latest_ticket = Ticket.query.order_by(Ticket.ticket_id.desc()).first()
-            if latest_ticket:
-                self.ticket_number = latest_ticket.ticket_id + 1
-            else:
-                self.ticket_number = 1
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.generate_ticket_number()
+
+    # def generate_ticket_number(self):
+    #     with current_app.app_context():
+    #         latest_ticket = Ticket.query.order_by(Ticket.ticket_id.desc()).first()
+    #         if latest_ticket:
+    #             self.ticket_number = latest_ticket.ticket_id + 1
+    #         else:
+    #             self.ticket_number = 1
 
     #ticket_number = IntegerField("Ticket ID", validators=[InputRequired, length(1, 6)], render_kw={'readonly': True}) 
 
