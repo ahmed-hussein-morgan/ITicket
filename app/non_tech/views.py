@@ -2,7 +2,7 @@
 from flask import render_template, redirect, request, url_for, flash
 from . import non_tech
 from flask_login import login_user, logout_user, login_required, current_user
-from ..models import User
+from ..models import Ticket
 from .forms import NewTicketForm
 
 
@@ -59,4 +59,5 @@ def non_tech_new_ticket():
 
 @non_tech.route("/all-tickets")
 def all_ticket():
+    tickets = Ticket.query.all()
     return render_template("non-tech_all-tickets.html", title="ITicket - User Dashboard", form=form)
