@@ -51,7 +51,6 @@ def tech_new_ticket():
                 )
             
             
-            
             db.session.add(ticket)
             db.session.commit()
             
