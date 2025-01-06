@@ -22,16 +22,16 @@
         </thead>
 
         <tbody>
-            {% for user in users %}
+            {% for ticket in tickets %}
             <tr>
-                <td>{{ tickets.ticket_id }}</td>
-                <td>{{ tickets.ticket_branch }}</td>
-                <td>{{ tickets.ticket_type }}</td>
+                <td>{{ ticket.ticket_id }}</td>
+                <td>{{ ticket.ticket_branch }}</td>
+                <td>{{ ticket.ticket_type }}</td>
                 <td>{{ ticket.ticket_category }}</td>
-                <td>{{ tickets.ticket_title }}</td>
-                <td>{{ tickets.ticket_details }}</td>
-                <td>{{ tickets.submission_datetime }}</td>
-                <td>{{ tickets.ticket_status}}</td>
+                <td>{{ ticket.ticket_title }}</td>
+                <td>{{ ticket.ticket_details }}</td>
+                <td>{{ ticket.submission_datetime }}</td>
+                <td>{{ ticket.ticket_status}}</td>
                 <td>Status Date</td>
                 <td>Tech User Name</td>
                 <td>Comment (optional) </td>

@@ -60,4 +60,4 @@ def non_tech_new_ticket():
 @non_tech.route("/all-tickets")
 def all_ticket():
     tickets = Ticket.query.all()
-    return render_template("non-tech_all-tickets.html", title="ITicket - User Dashboard")
+    return render_template("non-tech_all-tickets.html", title="ITicket - User Dashboard", tickets=tickets)
