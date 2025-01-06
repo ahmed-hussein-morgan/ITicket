@@ -7,17 +7,22 @@
 
     <div id="search-user" class="child">
 
-        <form>
+        <form method="POST" action="{{ url_for('tech.update_ticket') }}">
+            {{ search_form.hidden_tag() }}
 
             <div class="form-group">
                 <div>
-                    <label class="form-label"> User ID </label>
-                    <input type="text" class="form-control" placeholder="User ID">
+                    <!-- <label class="form-label"> User ID </label>
+                    <input type="text" class="form-control" placeholder="User ID"> -->
+                    {{ search_form.user_id.label(class="form-label") }}
+                    {{ search_form.user_id(class="form-control") }}
                 </div>
 
                 <div>
-                    <label class="form-label"> User Name </label>
-                    <input type="text" class="form-control" placeholder="User Name">
+                    <!-- <label class="form-label"> User Name </label>
+                    <input type="text" class="form-control" placeholder="User Name"> -->
+                    {{ search_form.username.label(class="form-label") }}
+                    {{ search_form.username(class="form-control") }}                    
                 </div>
 
             </div>
@@ -32,70 +37,58 @@
 
     <div id="update-user" class="child">
 
-        <form>
+        <form method="POST" action="{{ url_for('tech.update_ticket') }}">
+            {{ update_form.hidden_tag() }}
             <div class="form-group">
                 <div class="row">
                     <div class="col-6">
-                        <label class="form-label"> User ID </label>
-                        <input type="text" class="form-control" placeholder="User ID">
+                        <!-- <label class="form-label"> User ID </label>
+                        <input type="text" class="form-control" placeholder="User ID"> -->
+                        {{ update_form.user_id.label(class="form-label") }}
+                        {{ update_form.user_id(class="form-control", readonly=true) }}
                     </div>
         
                     <div class="col-6">
-                        <label class="form-label"> User Name </label>
-                        <input type="text" class="form-control" placeholder="User Name">
+                        {{ update_form.user_name.label(class="form-label") }}
+                        {{ update_form.user_name(class="form-control") }}
                     </div>
                 </div>
 
     
                 <div>
-                    <label class="form-label"> E-mail </label>
-                    <input type="text" class="form-control" placeholder="E-mail">
+                    {{ update_form.email.label(class="form-label") }}
+                    {{ update_form.email(class="form-control") }}
                 </div>
                 
                 <div class="row">
 
                     <div class="col-6">
-                        <label class="form-label"> User Password </label>
-                        <input type="text" class="form-control">
+                        {{ update_form.password.label(class="form-label") }}
+                        {{ update_form.password(class="form-control") }}
                     </div>
         
                     <div class="col-6">
-                        <label class="form-label"> Confirm Password</label>
-                        <input type="text" class="form-control">
+                        {{ update_form.confirm_password.label(class="form-label") }}
+                        {{ update_form.confirm_password(class="form-control") }}
                     </div>
 
                 </div>                    
     
                 <div>
-                    <label class="form-label">User Type</label>
-                    <select class="form-select">
-                        <option></option>
-                        <option>Tech</option>
-                        <option>Non-Tech</option>    
-                    </select>
+                    {{ update_form.user_type.label(class="form-label") }}
+                    {{ update_form.user_type(class="form-select") }}
                 </div>
     
                 <div class="row">
 
                     <div>
-                        <label class="form-label"> User Department</label>
-                        <select class="form-select">
-                            <option></option>
-                            <option>Accountant</option>
-                            <option>Sales</option>
-                            <option>HR</option> 
-                            <option>IT</option>  
-                            <option>Admin</option>
-                            <option>Stock Control</option>
-                            <option>Supply Chain</option>
-                            <option>Operation</option>
-                            <option>Quality Control</option>
-                        </select>
+                        {{ update_form.user_department.label(class="form-label") }}
+                        {{ update_form.user_department(class="form-select") }}
                     </div>
         
                     <div>
-                        <label class="form-label"> User Title</label>
-                        <input type="text" class="form-control">
+                        {{ update_form.user_job.label(class="form-label") }}
+                        {{ update_form.user_job(class="form-select") }}
                     </div>
 
                 </div>
@@ -103,24 +96,13 @@
                 
     
                 <div>
-                    <label class="form-label">User Branch</label>
-                    <select class="form-select">
-                        <option></option>
-                        <option>Head Quarter</option>
-                        <option>Heliopolis</option>
-                        <option>Nasr City</option>
-                        <option>New Cairo</option> 
-                        <option>6th October</option>    
-                    </select>
+                    {{ update_form.user_branch.label(class="form-label") }}
+                    {{ update_form.user_branch(class="form-select") }}
                 </div>
     
                 <div>
-                    <label class="form-label">User Status</label>
-                    <select class="form-select">
-                        <option></option>
-                        <option>Enabled</option>
-                        <option>Disabled</option>    
-                    </select>
+                    {{ update_form.user_status.label(class="form-label") }}
+                    {{ update_form.user_status(class="form-select") }}
                 </div>
     
             </div>
