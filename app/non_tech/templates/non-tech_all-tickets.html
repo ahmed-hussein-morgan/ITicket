@@ -8,6 +8,8 @@
         <thead>
             <tr>
                 <th scope="col"> Ticket Number </th>
+                <th scope="col"> Ticket Branch </th>
+                <th scope="col"> Ticket Type </th>
                 <th scope="col"> Category </th>
                 <th scope="col"> Title </th>
                 <th scope="col"> Details </th>
@@ -20,28 +22,21 @@
         </thead>
 
         <tbody>
+            {% for user in users %}
             <tr>
-                <td>1</td>
-                <td>Request</td>
-                <td>Mouse</td>
-                <td>i need new mouse</td>
-                <td>01-01-2024</td>
-                <td>submited</td>
-                <td>01-01-2024</td>
-                <td>Ahmed</td>
-                <td>No comment</td>
+                <td>{{ tickets.ticket_id }}</td>
+                <td>{{ tickets.ticket_branch }}</td>
+                <td>{{ tickets.ticket_type }}</td>
+                <td>{{ ticket.ticket_category }}</td>
+                <td>{{ tickets.ticket_title }}</td>
+                <td>{{ tickets.ticket_details }}</td>
+                <td>{{ tickets.submission_datetime }}</td>
+                <td>{{ tickets.ticket_status}}</td>
+                <td>Status Date</td>
+                <td>Tech User Name</td>
+                <td>Comment (optional) </td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Request</td>
-                <td>Keyboard</td>
-                <td>i need new keyboard</td>
-                <td>05-11-2024</td>
-                <td>submited</td>
-                <td>06-11-2024</td>
-                <td>Ahmed</td>
-                <td>No comment</td>
-            </tr>
+            {% endfor %}
         </tbody>
 
     </table>

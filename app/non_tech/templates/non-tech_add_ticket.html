@@ -11,23 +11,36 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-6">
+
+                    {{ form.ticket_branch.label(class="form-label") }}
+                    {% if form.ticket_branch.errors %}
+                    {{ form.ticket_branch(class="form-control form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.ticket_branch.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{ form.ticket_branch(class="form-control form-control") }}                    
+                    {% endif %}
+
                     <!-- <label for="ticketType" class="form-label">Ticket Type</label>
                     <select class="form-select">
                         <option></option>
                         <option>Request</option>
                         <option>Complain</option>    
                     </select> -->
-                    {{ form.ticket_type.label(class="form-label") }}
+                    <!-- {{ form.ticket_type.label(class="form-label") }}
                     {% if form.ticket_type.errors %}
                     {{ form.ticket_type(class="form-control form-control is-invalid") }}
                     <div class="invalid-feedback">
                         {% for error in form.ticket_type.errors %}
                             <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
+                        {% endfor %} -->
+                    <!-- </div>
                 {% else %}
                     {{ form.ticket_type(class="form-control form-control") }}                    
-                {% endif %}
+                {% endif %} -->
                 </div>
 
                 <div class="col-6">
@@ -54,6 +67,19 @@
             </div>
 
             <div>
+                {{ form.ticket_type.label(class="form-label") }}
+                {% if form.ticket_type.errors %}
+                {{ form.ticket_type(class="form-control form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.ticket_type.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                    {{ form.ticket_type(class="form-control form-control") }}                    
+                {% endif %}
+
+
                 <!-- <label for="ticket-branch" class="form-label">Ticket Branch</label>
                 <select class="form-select">
                     <option></option>
@@ -62,7 +88,7 @@
                     <option>Nasr City (Complain)</option>
                     <option>Water Way (Complain)</option> 
                 </select> -->
-                {{ form.ticket_branch.label(class="form-label") }}
+                <!-- {{ form.ticket_branch.label(class="form-label") }}
                 {% if form.ticket_branch.errors %}
                 {{ form.ticket_branch(class="form-control form-control is-invalid") }}
                 <div class="invalid-feedback">
@@ -72,7 +98,7 @@
                 </div>
                 {% else %}
                     {{ form.ticket_branch(class="form-control form-control") }}                    
-                {% endif %} 
+                {% endif %}  -->
             </div>
 
             <div>

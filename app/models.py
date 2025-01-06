@@ -245,7 +245,7 @@ class IT(db.Model):
     index = db.Column(db.Integer, primary_key=True, autoincrement=True)
     ticket_id = db.Column(db.Integer, db.ForeignKey('tickets.ticket_id'), nullable=False)
     tech_name = db.Column(db.String(30), nullable=True)
-    update_date = db.Column(db.Date, nullable=False, default=func.now().cast(db.Date))
+    update_date = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.now(timezone.utc))
     update_ticket_comment = db.Column(db.Text, nullable=True)
 
 class UserTicket(db.Model):
