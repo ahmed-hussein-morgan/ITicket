@@ -3,7 +3,7 @@ from flask import render_template, redirect, request, url_for, flash, current_ap
 from . import tech
 from flask_login import login_user, logout_user, login_required, current_user
 from ..models import User, Ticket, IT, UserTicket
-from .forms import NewUserForm, SearchTicketForm, SearchUserForm, NewTicketForm
+from .forms import NewUserForm, SearchTicketForm, SearchUserForm, NewTicketForm, UpdateUserForm
 from .. import db
 from datetime import datetime, timezone
 
@@ -121,6 +121,17 @@ def new_user():
 
 @tech.route("/update-user", methods=["GET", "POST"])
 def update_user():
+    search_form = SearchUserForm()
+    update_form = UpdateUserForm()
+
+    if search_form.validate_on_submit():
+        search_by_id = User.query.filter_by(id=search_form.user_id.data).first()
+        search_by_name = User.query.filter_by(employee_name=search_form.username.data).first()
+
+        if search_by_id or search_by_name:
+            pass
+        else:
+            flash(f"Invalid search: their is no user with this User ID or User Name", "dangerous")
     return render_template("tech_update_user.html", title="ITicket - User Dashboard")
 
 # Replace deleting the user by updating its status (Enable/Disable) to keep all users data.

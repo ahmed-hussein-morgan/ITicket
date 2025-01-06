@@ -103,6 +103,17 @@ class SearchUserForm(FlaskForm):
     username = StringField("User Name", validators=[InputRequired(), length(min=2, max=20)])
     submit = SubmitField("Find User")
 
+class UpdateUserForm(FlaskForm):
+    user_id = IntegerField("User ID", validators=[InputRequired()])
+    user_name = StringField("User Name", validators=[InputRequired(), length(min=2, max=20)])
+    email = EmailField("E-mail", validators=[Email(), InputRequired()])
+    password = PasswordField('Password', validators=[InputRequired()])
+    user_type = SelectField("User Type", choices=["", "Tech", "Non-Tech"], validate_choice=True, validators=[InputRequired()] )
+    user_department = SelectField("User Department", choices=["", "Accountant", "Operation", "HR", "IT", "Admin", "Stock Control", "Supply Chain", "Quality Control"], validators=[InputRequired()], validate_choice=True)
+    user_job = SelectField("User Job Title", choices=["", "Web Developer", "Accountant", "HR Generalist", "Team Leader", "Section head"], validate_choice=True, validators=[InputRequired()] )
+    user_branch = SelectField("User Branch", choices=["", "Head Quarter", "Heliopolis", "Nasr City", "New Cairo", "6th October"], validate_choice=True, validators=[InputRequired()] )    
+    user_status = SelectField("User Status", choices=["", "Enabled", "Disabled"], validate_choice=True, validators=[InputRequired()], default="Enabled" )
+    submit = SubmitField("Update") 
 
 class NewTicketForm(FlaskForm):
     # ticket_number = Ticket.query.filter_by(ticket_id).last()
