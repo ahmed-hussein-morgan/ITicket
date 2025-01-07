@@ -124,45 +124,55 @@ def update_user():
     search_form = SearchUserForm()
     update_form = UpdateUserForm()
 
-    if search_form.validate_on_submit():
 
-        # Search by User ID
-        search_by_id = User.query.filter_by(id=search_form.user_id.data).first()
+    # Search by User ID
+    search_by_id = User.query.filter_by(id=search_form.user_id.data).first()
 
-        # Search by Username
-        search_by_name = User.query.filter_by(employee_name=search_form.username.data).first()
-
-        if search_by_id:
-            update_form.user_id.data = search_by_id.id
-            update_form.user_name.data = search_by_id.employee_name
-            update_form.email.data = search_by_id.email
-            update_form.user_type.data = search_by_id.role_type
-            update_form.user_department.data = search_by_id.department
-            update_form.user_job.data = search_by_id.job_title
-            update_form.user_branch.data = search_by_id.branch
-            update_form.user_status.data = search_by_id.user_status
+    # Search by Username
+    search_by_name = User.query.filter_by(employee_name=search_form.username.data).first()
 
 
-        elif search_by_name:
-            # If found by Username, try to get ID
-            user_search_id = User.query.filter_by(employee_name=user_by_name.employee_name).first().id
+    if search_by_id:
+        update_form.user_id.data = search_by_id.id
+        update_form.user_name.data = search_by_id.employee_name
+        update_form.email.data = search_by_id.email
+        update_form.user_type.data = search_by_id.role_type
+        update_form.user_department.data = search_by_id.department
+        update_form.user_job.data = search_by_id.job_title
+        update_form.user_branch.data = search_by_id.branch
+        update_form.user_status.data = search_by_id.user_status
 
-            if user_search_id:
-               update_form.user_id.data =  user_search_id
-               update_form.user_name.data = user_by_name.employee_name
-               update_form.email.data = user_by_name.email
-               update_form.user_type.data = user_by_name.role_type
-               update_form.user_department.data = user_by_name.department
-               update_form.user_job.data = user_by_name.job_title
-               update_form.user_branch.data = user_by_name.branch
-               update_form.user_status.data = user_by_name.user_status
+        print(f"search by ID result is :{search_by_id.id}, {search_by_id.employee_name}, {search_by_id.email},\
+              {search_by_id.role_type},{search_by_id.department}, {search_by_id.job_title},\
+               {search_by_id.branch}, {search_by_id.user_status} ")
 
-            else:
-                flash(f"No user found with name {search_form.username.data}", "danger")
-        
+
+    elif search_by_name:
+        # If found by Username, try to get ID
+        user_search_id = User.query.filter_by(employee_name=search_by_name.employee_name).first().id
+
+        print(f" user_search_id id : {user_search_id}")
+
+        if user_search_id:
+            update_form.user_id.data =  user_search_id
+            update_form.user_name.data = search_by_name.employee_name
+            update_form.email.data = search_by_name.email
+            update_form.user_type.data = search_by_name.role_type
+            update_form.user_department.data = search_by_name.department
+            update_form.user_job.data = search_by_name.job_title
+            update_form.user_branch.data = search_by_name.branch
+            update_form.user_status.data = search_by_name.user_status
+
+            print(f"search by ID result is :{user_search_id}, {search_by_id.employee_name}, {search_by_id.email},\
+              {search_by_id.role_type},{search_by_id.department}, {search_by_id.job_title},\
+               {search_by_id.branch}, {search_by_id.user_status} ")
 
         else:
-            flash(f"No user found with ID {search_form.user_id.data} or name {search_form.username.data}", "danger")
+            flash(f"No user found with name {search_form.username.data}", "danger")
+    
+
+    else:
+        flash(f"No user found with ID {search_form.user_id.data} or name {search_form.username.data}", "danger")
 
 
 
@@ -176,24 +186,25 @@ def update_user():
             user_job =update_form.user_job.data
             user_branch = update_form.user_branch.data
             user_status = update_form.user_status.data
-            password = form.password.data
             
             # password = form.password.data
             user = User(id=user_id, employee_name=user_name, department=user_department, job_title=user_job, role_type=user_type, email=email, branch=user_branch, user_status=user_status)
-            user.set_password(password)
+            
+            if update_form.password.data:
+                user.set_password(password)
             
             
             db.session.add(user)
             db.session.commit()
             
-            flash(f'User updated successfully for {form.user_name.data}.', 'success')
+            flash(f'User updated successfully for {update_form.user_name.data}.', 'success')
 
 
             return redirect(url_for('tech.all_users'))
         except Exception as e:
             db.session.rollback()
             error_message = str(e)
-            return render_template('register.html', form=form, error=error_message)
+            return render_template('register.html', search_form=search_form, update_form=update_form, error=error_message)
     return render_template("tech_update_user.html", title="ITicket - User Dashboard", search_form=search_form, update_form=update_form)
 
 # Replace deleting the user by updating its status (Enable/Disable) to keep all users data.

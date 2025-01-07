@@ -99,15 +99,15 @@ class SearchTicketForm(FlaskForm):
     submit = SubmitField("Find Ticket")
 
 class SearchUserForm(FlaskForm):
-    user_id = IntegerField("User ID", validators=[InputRequired()])
-    username = StringField("User Name", validators=[InputRequired(), length(min=2, max=20)])
+    user_id = IntegerField("User ID", )
+    username = StringField("User Name", validators=[length(min=2, max=20)])
     submit = SubmitField("Find User")
 
 class UpdateUserForm(FlaskForm):
     user_id = IntegerField("User ID", validators=[InputRequired()])
     user_name = StringField("User Name", validators=[InputRequired(), length(min=2, max=20)])
     email = EmailField("E-mail", validators=[Email(), InputRequired()])
-    password = PasswordField('Password', validators=[InputRequired()])
+    password = PasswordField('Password')
     user_type = SelectField("User Type", choices=["", "Tech", "Non-Tech"], validate_choice=True, validators=[InputRequired()] )
     user_department = SelectField("User Department", choices=["", "Accountant", "Operation", "HR", "IT", "Admin", "Stock Control", "Supply Chain", "Quality Control"], validators=[InputRequired()], validate_choice=True)
     user_job = SelectField("User Job Title", choices=["", "Web Developer", "Accountant", "HR Generalist", "Team Leader", "Section head"], validate_choice=True, validators=[InputRequired()] )
