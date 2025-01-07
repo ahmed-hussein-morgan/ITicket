@@ -151,7 +151,7 @@ def update_user():
         # If found by Username, try to get ID
         user_search_id = User.query.filter_by(employee_name=search_by_name.employee_name).first().id
 
-        print(f" user_search_id id : {user_search_id}")
+        print(f" user_search_id : {user_search_id}")
 
         if user_search_id:
             update_form.user_id.data =  user_search_id
@@ -163,9 +163,9 @@ def update_user():
             update_form.user_branch.data = search_by_name.branch
             update_form.user_status.data = search_by_name.user_status
 
-            print(f"search by ID result is :{user_search_id}, {search_by_id.employee_name}, {search_by_id.email},\
-              {search_by_id.role_type},{search_by_id.department}, {search_by_id.job_title},\
-               {search_by_id.branch}, {search_by_id.user_status} ")
+            print(f"search by ID result is :{user_search_id}, {search_by_name.employee_name}, {search_by_name.email},\
+              {search_by_name.role_type},{search_by_name.department}, {search_by_name.job_title},\
+               {search_by_name.branch}, {search_by_name.user_status} ")
 
         else:
             flash(f"No user found with name {search_form.username.data}", "danger")
