@@ -125,6 +125,20 @@ def update_user():
     search_form = SearchUserForm()
     update_form = UpdateUserForm()
 
+    
+
+    # Search for the user by username
+    search_id = User.query.filter_by(id=search_form.user_id.data).first_or_404()
+    search_name = User.query.filter_by(username=search_form.username.data).first_or_404()
+    
+    if search_id or search_name:
+        update_form.user_name.data = user.employee_name
+        update_form.email.data = user.email
+        update_form.user_type.data = user.role_type
+        update_form.user_department.data = user.department
+        update_form.user_job.data = user.job_title
+        update_form.user_branch.data = user.branch
+        update_form.user_status.data = user.user_status
 
 
 
