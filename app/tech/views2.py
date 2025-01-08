@@ -212,6 +212,87 @@ def update_user():
     return render_template("tech_update_user.html", title="ITicket - User Dashboard", search_form=search_form, update_form=update_form)
 
 
+    # if search_by_id:
+    #     update_form.user_id.data = search_by_id.id
+    #     update_form.user_name.data = search_by_id.employee_name
+    #     update_form.email.data = search_by_id.email
+    #     update_form.user_type.data = search_by_id.role_type
+    #     update_form.user_department.data = search_by_id.department
+    #     update_form.user_job.data = search_by_id.job_title
+    #     update_form.user_branch.data = search_by_id.branch
+    #     update_form.user_status.data = search_by_id.user_status
+
+    #     print(f"search by ID result is :{search_by_id.id}, {search_by_id.employee_name}, {search_by_id.email},\
+    #           {search_by_id.role_type},{search_by_id.department}, {search_by_id.job_title},\
+    #            {search_by_id.branch}, {search_by_id.user_status} ")
+
+
+    # elif search_by_name:
+    #     # If found by Username, try to get ID
+    #     user_search_id = User.query.filter_by(employee_name=search_by_name.employee_name).first().id
+
+    #     print(f" user_search_id : {user_search_id}")
+
+    #     if user_search_id:
+    #         update_form.user_id.data =  user_search_id
+    #         update_form.user_name.data = search_by_name.employee_name
+    #         update_form.email.data = search_by_name.email
+    #         update_form.user_type.data = search_by_name.role_type
+    #         update_form.user_department.data = search_by_name.department
+    #         update_form.user_job.data = search_by_name.job_title
+    #         update_form.user_branch.data = search_by_name.branch
+    #         update_form.user_status.data = search_by_name.user_status
+
+    #         print(f"search by ID result is :{user_search_id}, {search_by_name.employee_name}, {search_by_name.email},\
+    #           {search_by_name.role_type},{search_by_name.department}, {search_by_name.job_title},\
+    #            {search_by_name.branch}, {search_by_name.user_status} ")
+
+    #     else:
+    #         flash(f"No user found with name {search_form.username.data}", "danger")
+    
+
+    # else:
+    #     flash(f"No user found with ID {search_form.user_id.data} or name {search_form.username.data}", "danger")
+
+
+
+    # if update_form.validate_on_submit():
+    #     try:
+    #         user_id = update_form.user_id.data
+    #         user_name = update_form.user_name.data
+    #         email = update_form.email.data
+    #         user_type = update_form.user_type.data
+    #         user_department = update_form.user_department.data
+    #         user_job =update_form.user_job.data
+    #         user_branch = update_form.user_branch.data
+    #         user_status = update_form.user_status.data
+            
+    #         # password = form.password.data
+    #         user = User(id=user_id, employee_name=user_name, department=user_department, job_title=user_job, role_type=user_type, email=email, branch=user_branch, user_status=user_status)
+            
+    #         if update_form.password.data:
+    #             user.set_password(password)
+            
+            
+    #         db.session.add(user)
+    #         db.session.commit()
+            
+    #         flash(f'User updated successfully for {update_form.user_name.data}.', 'success')
+
+
+    #         return redirect(url_for('tech.all_users'))
+    #     except Exception as e:
+    #         db.session.rollback()
+    #         error_message = str(e)
+    #         return render_template('register.html', search_form=search_form, update_form=update_form, error=error_message)
+    # return render_template("tech_update_user.html", title="ITicket - User Dashboard", search_form=search_form, update_form=update_form)
+
+# Replace deleting the user by updating its status (Enable/Disable) to keep all users data.
+#       "Delete" feature could be added into the next version when creating the "Manager" user_type.
+# @tech.route("/delete-user", methods=["GET", "POST"])
+# def delete_user():
+#     return render_template("tech_delete_user.html", title="ITicket - User Dashboard")
+
 @tech.route("/all-users", methods=["GET", "POST"])
 def all_users():
     users = User.query.all()
