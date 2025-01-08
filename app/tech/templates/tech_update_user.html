@@ -15,7 +15,7 @@
                     {{ search_form.user_id.label(class="form-label") }}
 
                     {% if search_form.user_id.errors %}
-                    {{ search_form.user_idl(class="form-control form-control is-invalid") }}
+                    {{ search_form.user_id(class="form-control form-control is-invalid") }}
                     <div class="invalid-feedback">
                         {% for error in search_form.user_id.errors %}
                             <span>{{ error }}</span>

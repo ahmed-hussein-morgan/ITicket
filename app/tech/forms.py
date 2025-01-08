@@ -99,7 +99,7 @@ class SearchTicketForm(FlaskForm):
     submit = SubmitField("Find Ticket")
 
 class SearchUserForm(FlaskForm):
-    user_id = IntegerField("User ID", )
+    user_id = IntegerField("User ID" )
     username = StringField("User Name", validators=[length(min=2, max=20)])
     submit = SubmitField("Find User")
 

@@ -125,90 +125,23 @@ def update_user():
     search_form = SearchUserForm()
     update_form = UpdateUserForm()
 
-
-    # Search by User ID
-    search_by_id = User.query.filter_by(id=search_form.user_id.data).first()
-
-    # Search by Username
-    search_by_name = User.query.filter_by(employee_name=search_form.username.data).first()
-
-
-
-    if not search_by_id and not search_by_name:
-        flash(f"No user found with this User ID or User Name {search_form.username.data}", "danger")
-
-    elif search_by_id:
-        user_search_id = User.query.filter_by(id=search_form.user_id.data).first()
-        print(f"ID - user_search_id = {user_search_id}")
-    elif search_by_name:
-        user_search_name = User.query.filter_by(employee_name=search_form.username.data).first().id
-        print(f"ID - user_search_name : {user_search_name}")
-    else:
-        user_search_id = None
-
-    # employee_query = db.session.query(User).filter(or_(
-    # User.id == user_search_id,
-    # User.employee_name == search_form.username.data
-    # )).first().id
-
-    # print(f"employee_query is {employee_query}")
-
-
-
-    # elif search_by_id or search_by_name:
-    #     user_search_id = User.query.filter(or_(User.id == search_by_id.id, User.employee_name == search_by_name.employee_name)).get(User.id)
-
-    #     print(f"user_search_id = {user_search_id}")
-
-    #     user_search_id = int(user_search_id)
-    #     print(f"INT user_search_id = {user_search_id}")
-
     
-    if update_form.validate_on_submit():
-        try:
-            # update_form.user_id.data = User.query.filter_by(id=employee_query).first().id
-            # print(f"update_form.user_id.data = {update_form.user_id.data}")
 
-            update_form.user_name.data = User.query.filter_by(id=employee_query).first().employee_name
-            print(f"update_form.user_name.data = {update_form.user_name.data}")
-
-            update_form.email.data = User.query.filter_by(id=employee_query).first().email
-            print(f"update_form.email.data = {update_form.email.data}")
-
-            update_form.user_type.data = User.query.filter_by(id=employee_query).first().role_type
-            print(f"update_form.user_type.data = {update_form.user_type.data}")
-
-            update_form.user_department.data = User.query.filter_by(id=employee_query).first().department
-            print(f"update_form.user_department.data = {update_form.user_department.data}")
-
-            update_form.user_job.data= User.query.filter_by(id=employee_query).first().job_title
-            print(f"update_form.user_job.data = {update_form.user_job.data}")
-
-            update_form.user_branch.data= User.query.filter_by(id=employee_query).first().branch
-            print(f"update_form.user_branch.data = {update_form.user_branch.data}")
-
-            update_form.user_status.data = User.query.filter_by(id=employee_query).first().user_status
-            print(f"update_form.user_status.data = {update_form.user_status.data}")
-
-            
-            # password = form.password.data
-            user = User(id=user_id, employee_name=user_name, department=user_department, job_title=user_job, role_type=user_type, email=email, branch=user_branch, user_status=user_status)
-            
-            if update_form.password.data:
-                user.set_password(password)
-            
-            
-            db.session.add(user)
-            db.session.commit()
-            
-            flash(f'User updated successfully for {update_form.user_name.data}.', 'success')
+    # Search for the user by username
+    search_id = User.query.filter_by(id=search_form.user_id.data).first_or_404()
+    search_name = User.query.filter_by(username=search_form.username.data).first_or_404()
+    
+    if search_id or search_name:
+        update_form.user_name.data = user.employee_name
+        update_form.email.data = user.email
+        update_form.user_type.data = user.role_type
+        update_form.user_department.data = user.department
+        update_form.user_job.data = user.job_title
+        update_form.user_branch.data = user.branch
+        update_form.user_status.data = user.user_status
 
 
-            return redirect(url_for('tech.all_users'))
-        except Exception as e:
-            db.session.rollback()
-            error_message = str(e)
-            return render_template('register.html', search_form=search_form, update_form=update_form, error=error_message)
+
     return render_template("tech_update_user.html", title="ITicket - User Dashboard", search_form=search_form, update_form=update_form)
 
 
