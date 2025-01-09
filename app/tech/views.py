@@ -125,6 +125,48 @@ def update_user():
     search_form = SearchUserForm()
     update_form = UpdateUserForm()
 
+    user_search = None
+
+    if search_form.validate_on_submit():
+        if search_form.user_id.data:
+            user_search = User.query.filter_by(id=search_form.user_id.data).first()
+        elif search_form.username.data:
+            user_search = User.query.filter_by(employee_name=search_form.username.data).first()
+
+        if user_search:
+            update_form.user_name.data = user_search.employee_name
+            update_form.email.data = user_search.email
+            update_form.user_type.data = user_search.role_type
+            update_form.user_department.data = user_search.department
+            update_form.user_job.data = user_search.job_title
+            update_form.user_branch.data = user_search.branch
+            update_form.user_status.data = user_search.user_status
+        else:
+            flash("User not found", "danger")
+
+    if update_form.validate_on_submit():
+        if user_search:
+            user_search.employee_name = update_form.user_name.data
+            user_search.email = update_form.email.data
+            if update_form.password.data:
+                user_search.set_password(update_form.password.data)
+            user_search.role_type = update_form.user_type.data
+            user_search.department = update_form.user_department.data
+            user_search.job_title = update_form.user_job.data
+            user_search.branch = update_form.user_branch.data
+            user_search.user_status = update_form.user_status.data
+
+            user = User(
+                employee_name=update_form.user_name.data,
+                email=update_form.email.data,
+                role_type=update_form.user_type.data,
+                department=update_form.user_department.data
+
+            )
+
+            db.session.commit()
+            flash("User updated successfully", "success")
+            return redirect(url_for("tech.all_users"))
 
 
 
@@ -135,3 +177,8 @@ def update_user():
 def all_users():
     users = User.query.all()
     return render_template("tech_all_users.html", title="ITicket - All Users", users=users)
+
+
+@tech.route("/test-update-user", methods=["GET", "PUT", "POST"])
+def test_update_user():
+    return render_template("test_tech_update_user.html", title="ITicket - User Dashboard", search_form=search_form, update_form=update_form)

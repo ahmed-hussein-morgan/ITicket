@@ -1,0 +1,208 @@
+{% extends "tech_user_tab-bar.html" %}
+
+
+{% block content %}
+
+<div id="update-container" class="container">
+
+    <div id="search-user" class="child">
+
+        <form method="POST" action="">
+            {{ search_form.hidden_tag() }}
+
+            <div class="form-group">
+                <div>
+                    {{ search_form.user_id.label(class="form-label") }}
+
+                    {% if search_form.user_id.errors %}
+                    {{ search_form.user_id(class="form-control form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in search_form.user_id.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ search_form.user_id(class="form-control form-control") }}                    
+                    {% endif %}  
+                </div>
+
+                <div>
+                    <!-- <label class="form-label"> User Name </label>
+                    <input type="text" class="form-control" placeholder="User Name"> -->
+                    {{ search_form.username.label(class="form-label") }}
+
+                    {% if search_form.username.errors %}
+                    {{ search_form.username(class="form-control form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in search_form.username.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ search_form.username(class="form-control form-control") }}                    
+                    {% endif %}                  
+                </div>
+
+            </div>
+            <div class="sub-bt">
+                <button type="submit" class="btn btn-primary">Find User</button>
+            </div>
+        </form>
+
+    </div>
+
+    <div id="divider"></div>
+
+    <div id="update-user" class="child">
+
+        <form method="POST" action="">
+            {{ update_form.hidden_tag() }}
+            <div class="form-group">
+                <div class="row">
+
+                    <div class="col-6">
+                        {{ update_form.user_name.label(class="form-label") }}
+
+                        {% if update_form.user_name.errors %}
+                        {{ update_form.user_name(class="form-control form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in update_form.user_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ update_form.user_name(class="form-control form-control") }}                    
+                        {% endif %}
+                    </div>
+                </div>
+
+    
+                <div>
+                    {{ update_form.email.label(class="form-label") }}
+
+                    {% if update_form.email.errors %}
+                    {{ update_form.email(class="form-control form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in update_form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ update_form.email(class="form-control form-control") }}                    
+                    {% endif %}
+                </div>
+                
+                <div class="row">
+
+                    <div class="col-6">
+                        {{ update_form.password.label(class="form-label") }}
+
+                        {% if update_form.password.errors %}
+                        {{ update_form.password(class="form-control form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in update_form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ update_form.password(class="form-control form-control") }}                    
+                        {% endif %}
+                    </div>
+        
+
+                </div>                    
+    
+                <div>
+                    {{ update_form.user_type.label(class="form-label") }}
+
+                    {% if update_form.user_type.errors %}
+                    {{ update_form.user_type(class="form-control form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in update_form.user_type.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ update_form.user_type(class="form-control form-control") }}                    
+                    {% endif %}
+                </div>
+    
+                <div class="row">
+
+                    <div>
+                        {{ update_form.user_department.label(class="form-label") }}
+
+                        {% if update_form.user_department.errors %}
+                        {{ update_form.user_department(class="form-control form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in update_form.user_department.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ update_form.user_department(class="form-control form-control") }}                    
+                        {% endif %}
+                    </div>
+        
+                    <div>
+                        {{ update_form.user_job.label(class="form-label") }}
+
+                        {% if update_form.user_job.errors %}
+                        {{ update_form.user_job(class="form-control form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in update_form.user_job.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ update_form.user_job(class="form-control form-control") }}                    
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                
+    
+                <div>
+                    {{ update_form.user_branch.label(class="form-label") }}
+
+                    {% if update_form.user_branch.errors %}
+                    {{ update_form.user_branch(class="form-control form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in update_form.user_branch.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ update_form.user_branch(class="form-control form-control") }}                    
+                    {% endif %}
+                </div>
+    
+                <div>
+                    {{ update_form.user_status.label(class="form-label") }}
+
+                    {% if update_form.user_status.errors %}
+                    {{ update_form.user_status(class="form-control form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in update_form.user_status.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ update_form.user_status(class="form-control form-control") }}                    
+                    {% endif %}
+                </div>
+    
+            </div>
+            <div class="sub-bt">
+                <button type="submit" class="btn btn-primary">Update User</button>
+            </div>
+        </form>
+    
+    </div>
+
+
+</div>
+
+
+{% endblock content %}

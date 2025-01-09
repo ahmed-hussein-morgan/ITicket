@@ -99,20 +99,34 @@ class SearchTicketForm(FlaskForm):
     submit = SubmitField("Find Ticket")
 
 class SearchUserForm(FlaskForm):
-    user_id = IntegerField("User ID" )
+    user_id = StringField("User ID" )
     username = StringField("User Name", validators=[length(min=2, max=20)])
     submit = SubmitField("Find User")
 
 class UpdateUserForm(FlaskForm):
-    user_name = StringField("User Name")
-    email = EmailField("E-mail")
-    password = PasswordField('Password')
-    user_type = SelectField("User Type", choices=["", "Tech", "Non-Tech"] )
-    user_department = SelectField("User Department", choices=["", "Accountant", "Operation", "HR", "IT", "Admin", "Stock Control", "Supply Chain", "Quality Control"])
-    user_job = SelectField("User Job Title", choices=["", "Web Developer", "Accountant", "HR Generalist", "Team Leader", "Section head"] )
-    user_branch = SelectField("User Branch", choices=["", "Head Quarter", "Heliopolis", "Nasr City", "New Cairo", "6th October"] )    
-    user_status = SelectField("User Status", choices=["", "Enabled", "Disabled"], default="Enabled" )
-    submit = SubmitField("Update") 
+    user_id = IntegerField("User ID", validators=[InputRequired()])
+    user_name = StringField("User Name", validators=[InputRequired(), length(min=2, max=20)])
+    email = EmailField("E-mail", validators=[Email(), InputRequired()])
+    password = PasswordField('Password', validators=[InputRequired()])
+    user_type = SelectField("User Type", choices=["", "Tech", "Non-Tech"], validate_choice=True, validators=[InputRequired()])
+    user_department = SelectField("User Department", choices=["", "Accountant", "Operation", "HR", "IT", "Admin", "Stock Control", "Supply Chain", "Quality Control"], validators=[InputRequired()], validate_choice=True)
+    user_job = SelectField("User Job Title", choices=["", "Web Developer", "Accountant", "HR Generalist", "Team Leader", "Section head"], validate_choice=True, validators=[InputRequired()])
+    user_branch = SelectField("User Branch", choices=["", "Head Quarter", "Heliopolis", "Nasr City", "New Cairo", "6th October"], validate_choice=True, validators=[InputRequired()])
+    user_status = SelectField("User Status", choices=["", "Enabled", "Disabled"], validate_choice=True, validators=[InputRequired()], default="Enabled")
+    submit = SubmitField("Update")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def populate_with_user_data(self, user):
+        self.user_id.data = user.id
+        self.user_name.data = user.employee_name
+        self.email.data = user.email
+        self.user_type.data = user.role_type
+        self.user_department.data = user.department
+        self.user_job.data = user.job_title
+        self.user_branch.data = user.branch
+        self.user_status.data = user.user_status
 
 class NewTicketForm(FlaskForm):
     # ticket_number = Ticket.query.filter_by(ticket_id).last()
