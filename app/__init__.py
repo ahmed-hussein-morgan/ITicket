@@ -322,12 +322,12 @@ def create_daemon_tech_user():
     if not daemon_user:
         # Create the daemon tech user
         new_user = User(
-            id=1,  
+            employee_id =1,  
             employee_name='daemon_tech',
             department='IT',
             job_title='Tech Support',
             email='daemon_tech@example.com',
-            role_type='tech',
+            role_type='Tech',
             password_hash=generate_password_hash('daemon_tech_password'),
             branch='Head Quarter',
             user_status='Enabled'
