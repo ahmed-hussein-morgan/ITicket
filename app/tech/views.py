@@ -6,7 +6,7 @@ from ..models import User, Ticket, IT, UserTicket
 from .forms import NewUserForm, SearchTicketForm, SearchUserForm, NewTicketForm, UpdateUserForm
 from .. import db
 from datetime import datetime, timezone
-from sqlalchemy import or_
+from sqlalchemy import or_, update
 
 @tech.route("/tech-dashboard")
 def tech_dashboard():
@@ -93,7 +93,7 @@ def new_user():
             password = form.password.data
             
             # password = form.password.data
-            user = User(id=user_id, employee_name=user_name, department=user_department, job_title=user_job, role_type=user_type, email=email, branch=user_branch, user_status=user_status)
+            user = User(employee_id = user_id, employee_name=user_name, department=user_department, job_title=user_job, role_type=user_type, email=email, branch=user_branch, user_status=user_status)
             user.set_password(password)
             
             
@@ -181,4 +181,48 @@ def all_users():
 
 @tech.route("/test-update-user", methods=["GET", "PUT", "POST"])
 def test_update_user():
+    search_form =  SearchUserForm()
+    update_form = UpdateUserForm()
+    get_user_by_id= None
+
+    if search_form.validate_on_submit() and search_form.submit.data:
+        user_id = search_form.user_id.data
+        get_user_by_id = User.query.filter_by(id=search_form.user_id.data).first()
+
+        if get_user_by_id:
+            update_form.user_id.data = get_user_by_id.id
+            update_form.user_name.data = get_user_by_id.employee_name
+            update_form.email.data = get_user_by_id.email
+            update_form.user_type.data = get_user_by_id.role_type
+            update_form.user_department.data = get_user_by_id.department
+            update_form.user_job.data = get_user_by_id.job_title
+            update_form.user_branch.data = get_user_by_id.branch
+            update_form.user_status.data = get_user_by_id.user_status
+
+
+        # elif search_form.username.data is not None:
+        #     pass
+        else:
+            flash(f"Invaled User", "dangerous")
+    
+    if update_form.submit.data and update_form.validate_on_submit:
+        get_user_by_id = User.query.filter_by(id=update_form.user_id.data).first()
+        if get_user_by_id:
+            get_user_by_id.id = update_form.user_id.data
+            get_user_by_id.employee_name = update_form.user_name.data
+            get_user_by_id.email = update_form.email.data
+            get_user_by_id.role_type = update_form.user_type.data
+            get_user_by_id.department = update_form.user_department.data
+            get_user_by_id.job_title = update_form.user_job.data
+            get_user_by_id.branch = update_form.user_branch.data
+            get_user_by_id.user_status = update_form.user_status.data 
+
+            db.session.commit()
+
+            flash("User updated sucessfully", "success")
+            return redirect(url_for("tech.all_users"))
+
+        else:
+            flash("User not found for update", "danger")
+
     return render_template("test_tech_update_user.html", title="ITicket - User Dashboard", search_form=search_form, update_form=update_form)

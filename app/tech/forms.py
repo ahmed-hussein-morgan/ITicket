@@ -67,7 +67,7 @@ class NewUserForm(FlaskForm):
 
 
     def validate_user_id(self, user_id):
-        id = User.query.filter_by(id=user_id.data).first()
+        id = User.query.filter_by(employee_id = user_id.data).first()
         
         if user_id.data < 1:
             raise ValidationError("User ID can not be less than 1")
@@ -99,8 +99,8 @@ class SearchTicketForm(FlaskForm):
     submit = SubmitField("Find Ticket")
 
 class SearchUserForm(FlaskForm):
-    user_id = StringField("User ID" )
-    username = StringField("User Name", validators=[length(min=2, max=20)])
+    user_id = IntegerField("User ID" )
+    # username = StringField("User Name")
     submit = SubmitField("Find User")
 
 class UpdateUserForm(FlaskForm):
@@ -115,18 +115,18 @@ class UpdateUserForm(FlaskForm):
     user_status = SelectField("User Status", choices=["", "Enabled", "Disabled"], validate_choice=True, validators=[InputRequired()], default="Enabled")
     submit = SubmitField("Update")
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
 
-    def populate_with_user_data(self, user):
-        self.user_id.data = user.id
-        self.user_name.data = user.employee_name
-        self.email.data = user.email
-        self.user_type.data = user.role_type
-        self.user_department.data = user.department
-        self.user_job.data = user.job_title
-        self.user_branch.data = user.branch
-        self.user_status.data = user.user_status
+    # def populate_with_user_data(self, user):
+    #     self.user_id.data = user.id
+    #     self.user_name.data = user.employee_name
+    #     self.email.data = user.email
+    #     self.user_type.data = user.role_type
+    #     self.user_department.data = user.department
+    #     self.user_job.data = user.job_title
+    #     self.user_branch.data = user.branch
+    #     self.user_status.data = user.user_status
 
 class NewTicketForm(FlaskForm):
     # ticket_number = Ticket.query.filter_by(ticket_id).last()

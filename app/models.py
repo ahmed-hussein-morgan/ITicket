@@ -114,6 +114,7 @@ class User(UserMixin, db.Model):
 
 
     id = db.Column(db.Integer, primary_key=True, nullable=False)
+    employee_id = db.Column(db.Integer, unique=True, nullable=False)
     employee_name = db.Column(db.String(20), nullable=False, unique=True)
     department = db.Column(db.String(20), nullable=False)
     job_title = db.Column(db.String(20), nullable=False)
